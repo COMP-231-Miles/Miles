@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const testRoutes = require('./routes/test');
+const userRoutes = require('./routes/user');
+
 const app = express();
 mongoose
   .connect(
@@ -31,6 +34,9 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use('/api/posts', testRoutes);
+app.use('/api/user', userRoutes);
 
 app.use((req, res, next) => {
   res.send('Hello from express');
