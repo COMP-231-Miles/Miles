@@ -8,9 +8,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TestService } from './services/test.service';
 import { AuthInterceptor } from './services/auth-interceptor';
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './partials/header/header.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, SearchBarComponent],
   imports: [
     BrowserModule, 
     AppRoutingModule, 
