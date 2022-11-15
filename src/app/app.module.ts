@@ -11,9 +11,10 @@ import { AuthInterceptor } from './services/auth-interceptor';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { FooterComponent } from './partials/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, SearchBarComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, SearchBarComponent, FooterComponent],
   imports: [
     BrowserModule, 
     AppRoutingModule, 
