@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Slide Navbar</title>
+	<link rel="stylesheet" type="text/css" href="testing.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form>
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text" name="name" placeholder="name" required="">
+					<input type="date" name="DOB" placeholder="DOB" required="">
+					<input type="text" list="gender" name="Gender" placeholder="Gender" required="">
+					<datalist id="gender">
+						<option>Male</option>
+						<option>Female</option>
+						<option>Prefer not to say</option>
+					  </datalist>  
+					<input type="text" name="Nationalitt" placeholder="Nationalitt" required="">
+					<input type="text" name="Street Add" placeholder="Street Add" required="">
+					<input type="text" name="City" placeholder="City" required="">
+					<input type="text" name="Country" placeholder="Country" required="">
+					<input type="text" name="Postal" placeholder="Postal" required="">
+					<input type="text" name="Phone" placeholder="Phone" required="">
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="email" name="Driver's License Number" placeholder="Driver's License Number" required="">
+					<input type="email" name="Country Issued" placeholder="Country Issued" required="">
+					<input type="date" name="date issued" placeholder="date issued" required="">
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="pswd" placeholder="Password" required="">
+					<input type="password" name="pswd" placeholder="Re-enter Password" required="">
+					<h4 style="color: gray; text-align:center">I have read and agreed with all the term & conditions</h4>
+					<input type="checkbox" required name="checkbox" value="check" id="agree" required="" />
+
+					<button>Sign up</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form>
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="pswd" placeholder="Password" required="">
+					<button>Login</button>
+				</form>
+			</div>
+	</div>
+</body>
+</html>
