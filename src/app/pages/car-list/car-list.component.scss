@@ -1,0 +1,22 @@
+.car-list {
+  width: 100%;
+  display: flex;
+  margin-top: 56px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+  gap: 30px;
+}
+
+
+#searchBar, label {
+  color: black !important;
+} 
+
+.cars-space {
+  gap: 20px;
+  app-card-car {
+    margin: 10px;
+  }
+}
