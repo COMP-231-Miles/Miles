@@ -1,0 +1,26 @@
+.header-container {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar-brand {
+  margin:0 10px !important; 
+}
+
+.nav-dropdown {
+  position: fixed;
+  right: 2em;
+}
+
+.login-form {
+  display: flex;
+  float: right;
+  position: fixed;
+  right: 2em;
+
+  &__input {
+    margin-right: 1em;
+  }
+}

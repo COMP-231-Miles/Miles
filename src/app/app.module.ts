@@ -14,12 +14,18 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { FooterComponent } from './partials/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, SearchBarComponent, FooterComponent],
+  declarations: [
+    AppComponent, 
+    HomeComponent, 
+    HeaderComponent, 
+    SearchBarComponent, 
+    FooterComponent
+  ],
   imports: [
     BrowserModule, 
     AppRoutingModule, 
     HttpClientModule, 
-    FormsModule
+    FormsModule,
   ],
   providers: [
     UserApiService,
