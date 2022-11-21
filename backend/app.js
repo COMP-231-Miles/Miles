@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 
 const testRoutes = require('./routes/test');
 const userRoutes = require('./routes/user');
-const carRoutes = require('./routes/car');
 
 const app = express();
 mongoose
@@ -38,8 +37,6 @@ app.use((req, res, next) => {
 
 app.use('/api/posts', testRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/car', carRoutes);
-
 
 app.use((req, res, next) => {
   res.send('Hello from express');

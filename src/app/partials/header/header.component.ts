@@ -1,44 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { LoginPayload, UserService } from './../../services/user.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.sass']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  email: string;
-  password: string;
-  isLoggedIn: boolean;
-  currentUser$: Observable<any>; //to-do: update any to user
-  ngUnsubscribe = new Subject<void>();
+export class HeaderComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor() { }
 
   ngOnInit(): void {
-    this.currentUser$ = this.userService.currentUserSource$;
   }
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
-
-  login(): void {
-    const payload: LoginPayload = {
-      email: this.email,
-      password: this.password,
-    };
-
-    // this.userService.login(payload).pipe();
-    this.userService.login(payload).pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe(() => {});
-  }
-
-  logout(): void {
-    this.userService.logout();
-    this.router.navigateByUrl('/');
-  }
 }
