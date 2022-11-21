@@ -12,6 +12,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FooterComponent } from './partials/footer/footer.component';
+import { CarListComponent } from './pages/car-list/car-list.component';
+import { CardCarComponent } from './components/card-car/card-car.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { FooterComponent } from './partials/footer/footer.component';
     HomeComponent, 
     HeaderComponent, 
     SearchBarComponent, 
-    FooterComponent
+    FooterComponent, CarListComponent, CardCarComponent
   ],
   imports: [
     BrowserModule, 
