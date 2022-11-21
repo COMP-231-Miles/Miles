@@ -1,6 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+import { LoginPayload } from './user.service';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +11,14 @@ import { Observable } from 'rxjs';
 export class UserApiService {
 
 constructor(private httpClient: HttpClient) { }
-
-
+//add user type
+login(body: LoginPayload): Observable<any> {
+  return this.httpClient
+  .post<any>('http://localhost:3000/api/user/login', body )
+  .pipe(
+    catchError((err: HttpErrorResponse) => {
+      return throwError(() => err.error);
+    })
+  );
+}
 }

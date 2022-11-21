@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-car-list',
@@ -9,10 +8,9 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarListComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private carService: CarService) { 
-    this.locationToCheck = this.route.snapshot.paramMap.get('location')?.replace('%20', ' ');
-    console.log(this.locationToCheck);    
-    this.getCars();
+  constructor(private route: ActivatedRoute) { 
+    this.locationToCheck = this.route.snapshot.paramMap.get('location');
+    this.addLocation(this.locationToCheck);
   }
 
   ngOnInit(): void {
@@ -21,21 +19,11 @@ export class CarListComponent implements OnInit {
   locationToCheck: any;
   carByLocationList: any;
   areCars: boolean = false;
-  carList: any = []
-
-  getCars() {
-    this.carService.getCars2().subscribe(res => {
-      this.carList = res.data;
-      console.log('cars: ');
-      console.log(this.carList);
-      this.addLocation(this.locationToCheck);
-    });    
-  }
 
   addLocation(loc: string) {
     this.carByLocationList = [];
     for (let index = 0; index < this.carList.length; index++) {
-      if(this.carList[index].pickupLoc == loc) {
+      if(this.carList[index].pickupLoc === loc) {
         this.carByLocationList.push(this.carList[index]);
       }      
     }
@@ -44,9 +32,7 @@ export class CarListComponent implements OnInit {
     } else {this.areCars = false; console.log('are Cars:' +this.areCars);}
   }
 
-
-
-  /*carList: any = [
+  carList: any = [
     {
       name: "Mazda 3",
       type: "Sedan",
@@ -86,6 +72,6 @@ export class CarListComponent implements OnInit {
       imageName:'https://www.motortrend.com/uploads/sites/10/2018/10/2019-ford-fiesta-s-sedan-angular-front.png',
       isAvailable: true
     },
-  ]*/
+  ]
 
 }
