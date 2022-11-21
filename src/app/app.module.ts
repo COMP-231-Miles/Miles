@@ -16,6 +16,7 @@ import { CarListComponent } from './pages/car-list/car-list.component';
 import { CardCarComponent } from './components/card-car/card-car.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FooterComponent, 
     CarListComponent, 
     CardCarComponent,
+    CardCarComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule, 
