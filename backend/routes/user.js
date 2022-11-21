@@ -15,7 +15,10 @@ router.post('/signup', (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       address: req.body.address,
-      userType: req.body.userType
+      DOB: req.body.DOB,
+      userType: req.body.userType,
+      driverLicense: req.body.driverLicense,
+      phone: req.body.phone
     });
     user
       .save()
