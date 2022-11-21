@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const Car = require("../models/car");
 
-router.get('/reserve', (req, res, next) => {
+router.get('', (req, res, next) => {
     //mongoose model name
     Car.find()// return all result.
       .then(documents => {
