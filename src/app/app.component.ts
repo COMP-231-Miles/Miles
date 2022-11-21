@@ -1,6 +1,5 @@
-import { UserService } from './services/user.service';
 import { UserApiService } from './services/user-api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TestService } from './services/test.service';
 
 interface Dummy {
@@ -11,17 +10,25 @@ interface Dummy {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements OnInit {
-  constructor(private userService: UserService) { }
-
-  ngOnInit(): void {
-    this.setCurrentUSer();
+export class AppComponent {
+  title:string;
+  dummy: any = {
+    id: null,
+    title: '',
+    content: ''
+  };
+  id = '';
+  constructor(private testService: TestService) {
+    this.testService.getDummy();
   }
 
-  setCurrentUSer(): void {
-    const user = JSON.parse(localStorage.getItem('user') as string) ;
-    this.userService.setCurrentUser(user);
+  addDummy() {
+    this.testService.addDummy(this.dummy);
+  }
+
+  deleteDummy() {
+    this.testService.deleteDummy(this.id);
   }
 }
