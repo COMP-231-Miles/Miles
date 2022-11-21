@@ -14,6 +14,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { FooterComponent } from './partials/footer/footer.component';
 import { CarListComponent } from './pages/car-list/car-list.component';
 import { CardCarComponent } from './components/card-car/card-car.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,17 @@ import { CardCarComponent } from './components/card-car/card-car.component';
     HomeComponent, 
     HeaderComponent, 
     SearchBarComponent, 
-    FooterComponent, CarListComponent, CardCarComponent
+    FooterComponent, 
+    CarListComponent, 
+    CardCarComponent,
   ],
   imports: [
     BrowserModule, 
     AppRoutingModule, 
     HttpClientModule, 
     FormsModule,
+    BsDropdownModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     UserApiService,
