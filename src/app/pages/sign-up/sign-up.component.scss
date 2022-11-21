@@ -1,0 +1,17 @@
+.sign-up {
+  width: 100%;
+  display: flex;
+  margin-top: 56px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+  gap: 30px;
+}
+
+.form-group {
+  margin: 15px 0 !important;
+  label {
+    margin-bottom: 7px !important;
+  }
+}
