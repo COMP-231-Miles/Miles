@@ -1,12 +1,9 @@
-import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { User } from 'src/app/models/user.interface';
+import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,11 +14,12 @@ export class SignUpComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
-  preview: string = '';
+  ngUnsubscribe = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +57,6 @@ export class SignUpComponent implements OnInit {
         email: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-        // }
       },
       { validators: this.passwordMatchValidator }
     );
@@ -71,9 +68,16 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
+    const payload: User = this.registerForm.value;
 
-    // this.userService.
-    console.log(JSON.stringify(this.registerForm.value));
+    this.userService
+      .register(payload)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(res => {
+        if (res.result) {
+          this.router.navigateByUrl('/');
+        }
+      });
   }
 
   get firstName() {

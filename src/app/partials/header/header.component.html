@@ -16,7 +16,7 @@
     </ul>
 
     <div class="dropdown nav-dropdown" *ngIf="(currentUser$ | async) as user" dropdown>
-      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle> Welcome {{user.lastName}}</a>
+      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle> Welcome {{user.firstName}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item">Edit Profile</a>
         <div class="dropdown-divider"></div>
