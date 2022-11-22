@@ -16,7 +16,9 @@
             <div
               class="signUp-container__alert"
               *ngIf="
-                firstName?.invalid && (firstName?.touched || firstName?.dirty) || submitted
+                (firstName?.invalid &&
+                  (firstName?.touched || firstName?.dirty)) ||
+                submitted
               ">
               <div *ngIf="firstName?.errors?.['required']">
                 First Name can't be emtpy
@@ -34,7 +36,8 @@
             <div
               class="signUp-container__alert"
               *ngIf="
-                lastName?.invalid && (lastName?.touched || lastName?.dirty) || submitted
+                (lastName?.invalid && (lastName?.touched || lastName?.dirty)) ||
+                submitted
               ">
               <div *ngIf="lastName?.errors?.['required']">
                 Last Name can't be emtpy
@@ -54,7 +57,10 @@
             required />
           <div
             class="signUp-container__alert"
-            *ngIf="getDOB?.invalid && (getDOB?.touched || getDOB?.dirty) || submitted">
+            *ngIf="
+              (getDOB?.invalid && (getDOB?.touched || getDOB?.dirty)) ||
+              submitted
+            ">
             <div *ngIf="getDOB?.errors?.['required']">
               Date of Birth can't be emtpy
             </div>
@@ -67,22 +73,19 @@
             formControlName="street"
             type="text"
             class="form-control"
-            placeholder="Street"
-            required />
+            placeholder="Street"/>
           <input
             style="width: 28%; display: inline-flex; margin-right: 4%"
             formControlName="city"
             type="text"
             class="form-control"
-            placeholder="City"
-            required />
+            placeholder="City"/>
           <input
             style="width: 32%; display: inline-flex"
             formControlName="country"
             type="text"
             class="form-control"
-            placeholder="Country"
-            required />
+            placeholder="Country"/>
         </div>
         <div class="form-group">
           <label>Contact</label> <br />
@@ -95,7 +98,10 @@
             required />
           <div
             class="signUp-container__alert"
-            *ngIf="getPhone?.invalid && (getPhone?.touched || getPhone?.dirty) || submitted">
+            *ngIf="
+              (getPhone?.invalid && (getPhone?.touched || getPhone?.dirty)) ||
+              submitted
+            ">
             <div *ngIf="getPhone?.errors?.['required']">
               Phone number can't be emtpy
             </div>
@@ -134,17 +140,27 @@
           <div
             class="signUp-container__alert"
             *ngIf="
-              (driverLicenseNumber?.invalid &&
-                (driverLicenseNumber?.touched || driverLicenseNumber?.dirty)) ||
-              dateIssued?.touched || dateIssued?.dirty ||
-              countryIssued?.touched || countryIssued?.dirty || submitted
+              dateIssued?.touched &&
+              driverLicenseNumber?.touched &&
+              countryIssued?.touched
             ">
             <div
-              *ngIf="driverLicenseNumber?.errors?.['required'] ||
-            countryIssued?.errors?.['required'] ||
-            dateIssued?.errors?.['required']
-            ">
-              Driver License fields can't be empty
+              *ngIf="driverLicenseNumber?.errors?.['required'] || 
+                        (driverLicenseNumber?.invalid &&
+                        driverLicenseNumber?.touched) ">
+              Driver License Number can't be empty
+            </div>
+            <div
+              *ngIf="countryIssued?.errors?.['required'] || 
+                        (countryIssued?.invalid &&
+                        countryIssued?.touched)">
+              Country Issued can't be empty
+            </div>
+            <div
+              *ngIf="dateIssued?.errors?.['required'] || 
+                        (dateIssued?.invalid &&
+                        dateIssued?.touched)">
+              Date Issued can't be empty
             </div>
             <div
               *ngIf="driverLicenseNumber?.errors?.['minlength'] || getPhone?.errors?.['maxlength']">
@@ -163,7 +179,9 @@
             required />
           <div
             class="signUp-container__alert"
-            *ngIf="email?.invalid && (email?.touched || email?.dirty) || submitted">
+            *ngIf="
+              (email?.invalid && (email?.touched || email?.dirty)) || submitted
+            ">
             <div *ngIf="email?.errors?.['required']">email can't be emtpy</div>
           </div>
         </div>
