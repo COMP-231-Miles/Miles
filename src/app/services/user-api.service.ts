@@ -1,4 +1,3 @@
-import { PoliciesComponent } from './../pages/policies/policies.component';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
