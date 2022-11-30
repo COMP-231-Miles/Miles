@@ -1,3 +1,4 @@
+import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { UserService } from './services/user.service';
 import { UserApiService } from './services/user-api.service';
 import { NgModule } from '@angular/core';
@@ -31,6 +32,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     CardCarComponent,
     PoliciesComponent,
     SignUpComponent,
+    MyReservationComponent,
   ],
   imports: [
     BrowserModule,
