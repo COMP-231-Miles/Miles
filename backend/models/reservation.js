@@ -4,11 +4,11 @@ const Car = require('./car');
 const User = require('./user');
 
 const reservationSchema = new Schema({
-  userID : string,
-  carID : string,
+  userID : String,
+  carID : String,
   fromDate : Date,
   toDate : Date,
-  location: string,
+  location: String,
   price: Number,
 
 });
