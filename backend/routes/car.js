@@ -20,8 +20,8 @@ router.get('', (req, res, next) => {
       type:req.body.type,
       passengers:req.body.passengers,
       price:req.body.price,
-      luggage:req.body.luggage,
-      isAuto:req.body.isAuto,
+      luggage:req.body,
+      isAuto:req.body.luggage,
       ACsup:req.body.ACsup,
       pickupLoc:req.body.pickupLoc,
       insurance:req.body.insurance,
@@ -36,14 +36,6 @@ router.get('', (req, res, next) => {
     });
   });
 
-  router.get('/:id', (req, res, next) => {
-    //mongoose model name
-    Car.deleteOne({ _id: req.params.id }).then(result => {
-        res.status(201).json({
-          message: 'Car deleted successfully'
-        })
-    });
-  });
 
   module.exports = router;
 
