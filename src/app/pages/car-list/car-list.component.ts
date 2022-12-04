@@ -44,7 +44,7 @@ export class CarListComponent implements OnInit {
     } else {this.areCars = false; console.log('are Cars:' +this.areCars);}
   }
 
-  carList: any = [
+  /*carList: any = [
     {
       name: "Mazda 3",
       type: "Sedan",
@@ -84,6 +84,6 @@ export class CarListComponent implements OnInit {
       imageName:'https://www.motortrend.com/uploads/sites/10/2018/10/2019-ford-fiesta-s-sedan-angular-front.png',
       isAvailable: true
     },
-  ]
+  ]*/
 
 }
