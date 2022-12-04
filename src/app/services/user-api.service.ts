@@ -1,24 +1,38 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { User } from '../models/user.interface';
 import { LoginPayload } from './user.service';
 
-
+export interface loginAuthentication {
+  message: string; 
+  user: User; 
+  token: string;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserApiService {
+  constructor(private httpClient: HttpClient) {}
 
-constructor(private httpClient: HttpClient) { }
-//add user type
-login(body: LoginPayload): Observable<any> {
-  return this.httpClient
-  .post<any>('http://localhost:3000/api/user/login', body )
-  .pipe(
-    catchError((err: HttpErrorResponse) => {
-      return throwError(() => err.error);
-    })
-  );
-}
+  login(body: LoginPayload): Observable<loginAuthentication> {
+    return this.httpClient
+      .post<loginAuthentication>('http://localhost:3000/api/user/login', body)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return throwError(() => err.error);
+        })
+      );
+  }
+
+  register(body: User): Observable<User> {
+    return this.httpClient
+      .post<User>('http://localhost:3000/api/user/signup', body)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return throwError(() => err.error);
+        })
+      );
+  }
 }

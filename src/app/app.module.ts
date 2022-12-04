@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestService } from './services/test.service';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { HomeComponent } from './pages/home/home.component';
@@ -21,21 +21,25 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    HomeComponent, 
-    HeaderComponent, 
-    SearchBarComponent, 
-    FooterComponent, 
-    CarListComponent, 
-    CardCarComponent, PoliciesComponent, SignUpComponent,
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    SearchBarComponent,
+    FooterComponent,
+    CarListComponent,
+    CardCarComponent,
+    CardCarComponent,
+    PoliciesComponent,
+    SignUpComponent,
   ],
   imports: [
-    BrowserModule, 
-    AppRoutingModule, 
-    HttpClientModule, 
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     BsDropdownModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UserApiService,

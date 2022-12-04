@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, take, tap } from 'rxjs';
-import { UserApiService } from './user-api.service';
+import { ReplaySubject, take, tap, Observable } from 'rxjs';
+import { User } from '../models/user.interface';
+import { loginAuthentication, UserApiService } from './user-api.service';
 
 export type LoginPayload = {
   email: string;
@@ -12,13 +13,12 @@ export type LoginPayload = {
 })
 export class UserService {
   private token: string;
-  //Todo: update data type
-  private currentUserSource = new ReplaySubject<any>(1);
+  private currentUserSource = new ReplaySubject<User | null>(1);
   currentUserSource$ = this.currentUserSource.asObservable();
 
   constructor(private userApiService: UserApiService) {}
 
-  login(authData: LoginPayload) {
+  login(authData: LoginPayload): Observable<loginAuthentication> {
     return this.userApiService.login(authData).pipe(
       take(1),
       tap(res => {
@@ -36,7 +36,11 @@ export class UserService {
     this.currentUserSource.next(null);
   }
 
-  setCurrentUser(user: any): void {
+  setCurrentUser(user: User): void {
     this.currentUserSource.next(user);
+  }
+
+  register(payload: User): Observable<any> {
+    return this.userApiService.register(payload);
   }
 }

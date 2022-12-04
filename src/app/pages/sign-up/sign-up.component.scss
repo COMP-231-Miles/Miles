@@ -1,4 +1,4 @@
-.sign-up {
+.signUp-container {
   width: 100%;
   display: flex;
   margin-top: 56px;
@@ -7,6 +7,15 @@
   flex-direction: column;
   padding: 50px;
   gap: 30px;
+
+  &__header {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__alert {
+    color: #c5404c;
+  }
 }
 
 .form-group {
