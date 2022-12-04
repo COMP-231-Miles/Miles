@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { User } from 'src/app/models/user.interface';
 import { LoginPayload, UserService } from './../../services/user.service';
 
 @Component({
@@ -13,13 +12,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   email: string;
   password: string;
   isLoggedIn: boolean;
-  currentUser$: Observable<User | null>;
+  currentUser$: Observable<any>; //to-do: update any to user
   ngUnsubscribe = new Subject<void>();
 
-  constructor(
-    private userService: UserService, 
-    private router: Router,
-    ) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.currentUser$ = this.userService.currentUserSource$;
@@ -36,6 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       password: this.password,
     };
 
+    // this.userService.login(payload).pipe();
     this.userService.login(payload).pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(() => {});
   }
@@ -43,9 +40,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.userService.logout();
     this.router.navigateByUrl('/');
-  }
-  
-  navigateToRegister(): void {
-    this.router.navigate(['sign-up'])
   }
 }
