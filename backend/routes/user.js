@@ -15,11 +15,14 @@ router.post('/signup', (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       address: req.body.address,
-      userType: req.body.userType
+      DOB: req.body.DOB,
+      userType: req.body.userType,
+      driverLicense: req.body.driverLicense,
+      phone: req.body.phone
     });
     user
       .save()
-      .then(result => {
+      .then((result) => {
         res.status(201).json({
           message: 'User Created!',
           result: result,
@@ -74,6 +77,16 @@ router.post('/login', (req, res, next) => {
         message: err,
       });
     });
+});
+
+router.get('/:id', (req, res, next) => {
+  //mongoose model name
+  User.findById({ _id: req.params.id }).then(result => {
+      res.status(201).json({
+        message: 'User fetched successfully',
+        data: result
+      })
+  });
 });
 
 module.exports = router;
