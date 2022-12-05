@@ -18,16 +18,27 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PoliciesComponent } from './pages/policies/policies.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { BookComponent } from './pages/book/book.component';
+import { CustomerAccountComponent } from './pages/customer-account/customer-account.component';
+import { AdminAccountComponent } from './pages/admin-account/admin-account.component';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    HomeComponent, 
-    HeaderComponent, 
-    SearchBarComponent, 
-    FooterComponent, 
-    CarListComponent, 
-    CardCarComponent, PoliciesComponent, SignUpComponent,
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    SearchBarComponent,
+    FooterComponent,
+    CarListComponent,
+    CardCarComponent,
+    CardCarComponent,
+    PoliciesComponent,
+    SignUpComponent,
+    BookComponent,
+    CustomerAccountComponent,
+    AdminAccountComponent,
+    InvoiceComponent,
   ],
   imports: [
     BrowserModule, 

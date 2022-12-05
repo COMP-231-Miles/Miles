@@ -38,4 +38,8 @@ export class CarService {
   getCars2 () {
     return this.httpClient.get<any>('http://localhost:3000/api/car');
   }
+
+  getCarById(id:string) {
+    return this.httpClient.get<any>('http://localhost:3000/api/car/'+id);
+  }
 }

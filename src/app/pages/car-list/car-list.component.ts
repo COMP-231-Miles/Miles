@@ -44,6 +44,8 @@ export class CarListComponent implements OnInit {
     } else {this.areCars = false; console.log('are Cars:' +this.areCars);}
   }
 
+
+
   /*carList: any = [
     {
       name: "Mazda 3",
