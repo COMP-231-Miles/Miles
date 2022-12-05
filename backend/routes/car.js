@@ -36,11 +36,21 @@ router.get('', (req, res, next) => {
     });
   });
 
-  router.get('/:id', (req, res, next) => {
+  /*router.get('/:id', (req, res, next) => {
     //mongoose model name
-    Car.deleteOne({ _id: req.params.id }).then(result => {
+    Car.findOne({ _id: req.params.id }).then(result => {
         res.status(201).json({
           message: 'Car deleted successfully'
+        })
+    });
+  });*/
+
+  router.get('/:id', (req, res, next) => {
+    //mongoose model name
+    Car.findById({ _id: req.params.id }).then(result => {
+        res.status(201).json({
+          message: 'Car fetched successfully',
+          data: result
         })
     });
   });
