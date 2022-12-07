@@ -1,0 +1,10 @@
+form {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 20px;
+  button {height: max-content;}
+}
+
+label {color: white}
+a {text-decoration: none; color: black; font-weight: 500;}

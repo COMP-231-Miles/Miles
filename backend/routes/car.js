@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router();
 const Car = require("../models/car");
 
+
 // Get all cars
+
 router.get('', (req, res, next) => {
     //mongoose model name
     Car.find()// return all result.
@@ -39,6 +41,7 @@ router.get('', (req, res, next) => {
   });
 
 
+
   // Delete car by ID
   router.get('/delete/:id', (req, res, next) => {
     //mongoose model name
@@ -49,12 +52,14 @@ router.get('', (req, res, next) => {
     });
   });
 
-  // Get car by ID
+  
+// Get car by ID
   router.get('/:id', (req, res, next) => {
     //mongoose model name
-    Car.deleteOne({ _id: req.params.id }).then(result => {
+    Car.findById({ _id: req.params.id }).then(result => {
         res.status(201).json({
-          message: 'Car deleted successfully'
+          message: 'Car fetched successfully',
+          data: result
         })
     });
   });

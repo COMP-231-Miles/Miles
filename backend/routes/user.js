@@ -5,6 +5,19 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const User = require('../models/user');
+//api/user
+router.get('', (req, res, next) => {
+  //mongoose model name
+  User.find()// return all result. 
+    .then(user => {
+      res.status(200).json({
+        message: 'user fetched successfully',
+        data: user,
+      });
+    }); 
+});
+
+
 //api/user/signup
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
@@ -15,11 +28,14 @@ router.post('/signup', (req, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       address: req.body.address,
-      userType: req.body.userType
+      DOB: req.body.DOB,
+      userType: req.body.userType,
+      driverLicense: req.body.driverLicense,
+      phone: req.body.phone
     });
     user
       .save()
-      .then(result => {
+      .then((result) => {
         res.status(201).json({
           message: 'User Created!',
           result: result,
@@ -45,9 +61,6 @@ router.post('/login', (req, res, next) => {
         });
       }
       fetchedUSer = user;
-      console.log(req.body.password);
-      console.log(user.password);
-
       return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
@@ -68,7 +81,8 @@ router.post('/login', (req, res, next) => {
         }
       );
       res.status(200).json({
-        token: token
+        token: token,
+        user: fetchedUSer
       })
     })
     .catch(err => {
@@ -76,6 +90,16 @@ router.post('/login', (req, res, next) => {
         message: err,
       });
     });
+});
+
+router.get('/:id', (req, res, next) => {
+  //mongoose model name
+  User.findById({ _id: req.params.id }).then(result => {
+      res.status(201).json({
+        message: 'User fetched successfully',
+        data: result
+      })
+  });
 });
 
 module.exports = router;
