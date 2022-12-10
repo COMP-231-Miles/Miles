@@ -1,1 +1,9 @@
-<p>policies works!</p>
+<section class="policy-space">
+  <h2 class="exo">Miles Policies</h2>
+
+  <div class="policies-content dir-col">
+    <h5 *ngFor="let policy of policies; let i = index;" class="exo"><strong>{{i+1}}. {{policy.title}}.</strong>{{policy.description}}</h5>
+  </div>  
+
+</section>
+
