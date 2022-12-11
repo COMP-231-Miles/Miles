@@ -7,6 +7,7 @@ const testRoutes = require('./routes/test');
 const userRoutes = require('./routes/user');
 const carRoutes = require('./routes/car');
 const reservationRoutes = require('./routes/reservation');
+const policyRoutes = require('./routes/policy');
 
 const app = express();
 mongoose
@@ -41,6 +42,7 @@ app.use('/api/posts', testRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/car', carRoutes);
 app.use('/api/reservation', reservationRoutes);
+app.use('/api/policy', policyRoutes);
 
 
 app.use((req, res, next) => {
