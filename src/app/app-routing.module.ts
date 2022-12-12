@@ -1,6 +1,8 @@
+import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookComponent } from './pages/book/book.component';
+import { AuthGuard } from './guards/auth.guard';
 import { CarListComponent } from './pages/car-list/car-list.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
@@ -14,6 +16,7 @@ const routes: Routes = [
   {path: 'invoice/:car/:location/:dateFrom/:dateTo', component: InvoiceComponent, data: {title: 'Cars'}},
   {path: 'policies', component: PoliciesComponent, data: {title: 'Cars'}},
   {path: 'sign-up', component: SignUpComponent, data: {title: 'Cars'}},
+  {path: 'my-reservation', component: MyReservationComponent },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];

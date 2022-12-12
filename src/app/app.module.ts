@@ -1,3 +1,4 @@
+import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { UserService } from './services/user.service';
 import { UserApiService } from './services/user-api.service';
 import { NgModule } from '@angular/core';
@@ -39,15 +40,17 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
     CustomerAccountComponent,
     AdminAccountComponent,
     InvoiceComponent,
+    MyReservationComponent,
   ],
   imports: [
-    BrowserModule, 
-    AppRoutingModule, 
-    HttpClientModule, 
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UserApiService,

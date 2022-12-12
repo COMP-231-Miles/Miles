@@ -1,0 +1,59 @@
+@mixin device($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (min-width: 320px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tabport {
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tabland {
+    @media only screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1366px) and (min-height: 720px) {
+      @content;
+    }
+  }
+}
+
+@mixin section {
+  padding: 24px 0;
+
+  @include device(tabport) {
+    padding: 36px 0;
+  }
+
+  @include device(desktop) {
+    padding: 48px 0;
+  }
+}
+
+@mixin cc3-web-navbar-space {
+  transform: translateY(60px);
+}
+
+@mixin hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Chrome and Safari */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// breakout the container padding and force the element to have 100vw
+@mixin full-screen-width {
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}

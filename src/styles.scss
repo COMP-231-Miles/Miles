@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
-@import url('https://fonts.googleapis.com/css2?family=Exo:wght@300;600&family=Open+Sans:wght@300&family=Oswald:wght@500;700&display=swap');
+@use './sass/abstracts/font';
+@use './sass/abstracts/mixins';
+@use './sass/abstracts/variables';
 
 .exo {  font-family: 'Exo', serif !important; } //Exo
 
