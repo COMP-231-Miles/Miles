@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
   {path: 'car-list/:location/:dateFrom/:dateTo', component: CarListComponent, data: {title: 'Cars'}},
   {path: 'book/:car/:location/:dateFrom/:dateTo', component: BookComponent, data: {title: 'Booking'}},
-  {path: 'invoice/:car/:location/:dateFrom/:dateTo', component: InvoiceComponent, data: {title: 'Cars'}},
+  {path: 'invoice/:car/:location/:dateFrom/:dateTo/:reservation', component: InvoiceComponent, data: {title: 'Cars'}},
   {path: 'policies', component: PoliciesComponent, data: {title: 'Cars'}},
   {path: 'sign-up', component: SignUpComponent, data: {title: 'Cars'}},
   {path: 'my-reservation', component: MyReservationComponent },

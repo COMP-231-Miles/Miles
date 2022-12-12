@@ -9,9 +9,9 @@
     <div class="dir-row desc-space">       
       <div class="description dir-col">
         <h4 class="exo">Reservation Details</h4> 
-        <h5>Reservation No. : </h5>
-        <h6>Name: </h6>
-        <h6>email: </h6>
+        <h5>Reservation No. {{reservationNum}} </h5>
+        <h6>Name: {{user.firstName}} {{user.lastName}}</h6>
+        <h6>email: {{user.email}}</h6>
         <h6>Dates: {{dateFromToCheck}} - {{dateToToCheck}}</h6>
         <h6>Location: {{carSelected.pickupLoc}}</h6>
         <h6>Car Model: {{carSelected.name}}</h6>

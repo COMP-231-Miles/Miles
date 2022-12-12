@@ -4,14 +4,14 @@
   <section *ngIf="!isNext" class="booking-card">
     <div class="dir-row step-space">
       <div class="step exo">Step 1</div>
-      <h4 class="exo blue"><b>→ Review your Information</b></h4>
+      <h4 class="exo blue"><b>→ Review Car Information</b></h4>
     </div>
   
-    <div class="dir-row desc-space">       
+    <div class="dir-row desc-space" *ngIf="isCar">       
       <div class="description dir-col">
         <h4 class="exo">Car Details</h4> 
         <h6>Dates: {{dateFromToCheck}} - {{dateToToCheck}}</h6>
-        <h6>Location: {{carSelected.pickupLoc}}</h6>
+        <h6>Location: {{locationToCheck}}</h6>
         <h6>Car Model: {{carSelected.name}}</h6>
         <h6>Type: {{carSelected.type}}</h6>
         <h6>Passengers: {{carSelected.passengers}}</h6>
@@ -32,11 +32,30 @@
   <section *ngIf="isNext" class="booking-card">
     <div class="dir-row step-space">
       <div class="step exo">Step 2</div>
-      <h4 class="exo blue"><b>→ Payment Information</b></h4>
+      <h4 class="exo blue"><b>→ Review Your Personal Information</b></h4>
     </div>
   
     <div class="dir-row desc-space">    
-      <form [formGroup]="paymentForm" (ngSubmit)="onSubmit(paymentForm.value)" class="container">
+
+      <div class="description dir-col" *ngIf="isUser">
+        <h4 class="exo">Information</h4> 
+        <h6>First Name: {{user.firstName}}</h6>
+        <h6>Last Name: {{user.lastName}}</h6>
+        <h6>Address: {{user.address.city}}</h6>
+        <h6>E-mail: {{user.email}}</h6>
+        <h6>Phone: {{user.phone}}</h6>
+      </div>
+      <div class="description dir-col" *ngIf="isUser">
+        <h4 class="exo">Driver License</h4> 
+        <h6>Number: {{user.driverLicense.number}}</h6>
+        <h6>Country Issued: {{user.driverLicense.countryIssued}}</h6>
+        <h6>Date Issued: {{user.driverLicense.dateIssued}}</h6>
+        <div class="dir-row" style="gap: 15px">
+          <button (click)="isNext = false" class="btn btn-secondary"><b>Back</b></button> 
+          <button (click)="onSubmit()" class="btn btn-warning"><b>Book Now</b></button> 
+        </div>        
+      </div>
+      <!-- <form [formGroup]="paymentForm" (ngSubmit)="onSubmit(paymentForm.value)" class="container">
         <div class="form-row row">
             <div class="form-group col-lg-12">
               <label><h6>Cardholder Name <b>*</b></h6></label>
@@ -63,11 +82,10 @@
               <input type="email" formControlName="email" [ngClass]="{'is-invalid': submitted && paymentForm.controls.email.errors}" class="form-control" placeholder="Email">
             </div>         
         </div>      
-        <!--Buttons-->
         <div class="dir-row buttons" style="justify-content: flex-end;">
             <button type="submit" class="btn btn-primary"><b>Book Now</b></button>
         </div>
-      </form>       
+      </form>        -->
     </div>    
   </section>
   
