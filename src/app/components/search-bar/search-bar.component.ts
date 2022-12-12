@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,16 +10,44 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
+
   @Input() placeholder: String = 'Search';
-  @Output() newItemEvent = new EventEmitter<string>();
 
-  addNewLocation(value: string) {
-    this.newItemEvent.emit(value);
+  constructor(private router: Router) { }
+
+  date = new Date;
+  isloc: boolean = true;
+  isdf: boolean = true;
+  isdt: boolean = true;
+
+  goTo(loc: string, df: string, dt: string) {
+    const dateF = new Date(df);
+    const dateT = new Date(dt);
+    if(loc.length < 1){
+      alert('⚠️ You must complete all the fields');
+      this.isloc = false;
+      return;
+    } else this.isloc = true;
+    if(df.length < 1){
+      alert('⚠️ You must complete all the fields');
+      this.isdf = false;
+      return;
+    } else this.isdf = true;
+    if(dt.length < 1){
+      alert('⚠️ You must complete all the fields');
+      this.isdt = false;
+      return;
+    } else this.isdt = true;
+    if(dt < df) {
+      alert('⚠️ Return date cannot be before Pick-up date!');
+      this.isdt = false;
+      return;
+    } else {
+      this.router.navigateByUrl('/car-list/'+loc+'/'+df+'/'+dt);
+    }    
   }
-
-  constructor() { }
-
   ngOnInit(): void {
+    
   }
 
 }
