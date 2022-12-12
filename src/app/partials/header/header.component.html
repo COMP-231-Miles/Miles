@@ -16,7 +16,7 @@
     </ul>
 
     <div class="dropdown nav-dropdown" *ngIf="(currentUser$ | async) as user" dropdown>
-      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle> Welcome {{user.firstName}}</a>
+      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle> Welcome {{user.lastName}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item">Edit Profile</a>
         <div class="dropdown-divider"></div>
@@ -26,9 +26,13 @@
       </div>
     </div>
 
-    <div
+    <form
       *ngIf="!(currentUser$ | async)"
-      class="login-form"
+      #loginForm="ngForm"
+      class="form-inline mt-2 mt-md-0 login-form"
+      role="search"
+      (ngSubmit)="login()"
+      autocomplete="off"
     >
       <input
         name="username"
@@ -44,8 +48,7 @@
         type="password"
         placeholder="password"
       />
-      <button class="btn btn-light login-form__login-btn" type="submit" (click)="login()">Login</button>
-      <button type="button" class="btn btn-dark login-form__register-btn" (click)="navigateToRegister()">Sign Up</button>
-    </div>
+      <button class="btn btn-light " type="submit">Login</button>
+    </form>
   </div>
 </nav>

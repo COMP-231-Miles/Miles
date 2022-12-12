@@ -5,6 +5,19 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const User = require('../models/user');
+//api/user
+router.get('', (req, res, next) => {
+  //mongoose model name
+  User.find()// return all result. 
+    .then(user => {
+      res.status(200).json({
+        message: 'user fetched successfully',
+        data: user,
+      });
+    }); 
+});
+
+
 //api/user/signup
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
@@ -77,6 +90,16 @@ router.post('/login', (req, res, next) => {
         message: err,
       });
     });
+});
+
+router.get('/:id', (req, res, next) => {
+  //mongoose model name
+  User.findById({ _id: req.params.id }).then(result => {
+      res.status(201).json({
+        message: 'User fetched successfully',
+        data: result
+      })
+  });
 });
 
 module.exports = router;

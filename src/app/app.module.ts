@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { TestService } from './services/test.service';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { HomeComponent } from './pages/home/home.component';
@@ -19,6 +19,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PoliciesComponent } from './pages/policies/policies.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { BookComponent } from './pages/book/book.component';
+import { CustomerAccountComponent } from './pages/customer-account/customer-account.component';
+import { AdminAccountComponent } from './pages/admin-account/admin-account.component';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -32,16 +36,19 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     CardCarComponent,
     PoliciesComponent,
     SignUpComponent,
+    BookComponent,
+    CustomerAccountComponent,
+    AdminAccountComponent,
+    InvoiceComponent,
     MyReservationComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
+    BrowserModule, 
+    AppRoutingModule, 
+    HttpClientModule, 
     FormsModule,
     BsDropdownModule.forRoot(),
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     UserApiService,
