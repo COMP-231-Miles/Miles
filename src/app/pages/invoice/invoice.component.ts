@@ -36,6 +36,7 @@ export class InvoiceComponent implements OnInit {
       console.log(this.carSelected);
       this.totalPrice(this.dateFromToCheck, this.dateToToCheck);
     });    
+
   } 
   
   isUser: boolean = false;

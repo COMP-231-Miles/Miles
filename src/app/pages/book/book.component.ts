@@ -46,6 +46,7 @@ export class BookComponent implements OnInit {
     });
   } 
 
+
   isUser: boolean = false;
   user: any = [];
   getUser() {
@@ -65,6 +66,7 @@ export class BookComponent implements OnInit {
       alert('Please, complete all the required fields before submitting.');
       return;
     } 
+
     console.warn(data);*/
     alert('Your payment has been successfully submitted.');
     const newReservation: Reservation = {
@@ -75,6 +77,7 @@ export class BookComponent implements OnInit {
       location: this.locationToCheck,
       price: this.price,
     };
+
 
     this.reservationService.createReservations(newReservation).subscribe((reservation) => {
       console.log(reservation);
