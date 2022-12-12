@@ -1,3 +1,4 @@
+import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { UserService } from './services/user.service';
 import { UserApiService } from './services/user-api.service';
 import { NgModule } from '@angular/core';
@@ -5,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestService } from './services/test.service';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { HomeComponent } from './pages/home/home.component';
@@ -39,14 +40,16 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
     CustomerAccountComponent,
     AdminAccountComponent,
     InvoiceComponent,
+    MyReservationComponent,
   ],
   imports: [
-    BrowserModule, 
-    AppRoutingModule, 
-    HttpClientModule, 
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     BsDropdownModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UserApiService,

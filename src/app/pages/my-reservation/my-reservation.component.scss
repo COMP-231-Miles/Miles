@@ -1,0 +1,49 @@
+@use '../../../sass/abstracts/mixins' as m;
+@use '../../../sass/abstracts/font' as f;
+body {
+  width: 100%;
+}
+.reservation-container {
+  display: grid;
+  grid-column-gap: 24px;
+  grid-template-columns: 20% 40%;
+  grid-template-rows: repeat(3, auto);
+  padding: 14px 10px;
+  grid-template-areas:
+      "head head"
+      "left right1";
+  justify-content: center;
+
+  &__header {
+    grid-area: head;
+    font-size: f.$header-lg;
+    text-align: center;
+  }
+
+  &__image {
+    grid-area: right;
+  }
+
+  .car-information {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 10px;
+  }
+
+  .car-information-item {
+    display: grid;
+    grid-template-columns: 40% 60%;
+  }
+
+  .car-information-item > label {
+    font-weight: bold;
+  }
+
+  .button-container {
+    grid-column: 1/-1;
+
+    button {
+      margin-right: 4%;
+    }
+  }
+}

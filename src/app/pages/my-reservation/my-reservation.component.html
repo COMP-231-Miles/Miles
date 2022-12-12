@@ -1,0 +1,34 @@
+<div class="reservation-container">
+  <div class="reservation-container__header">My reservation</div>
+  <div class="car-information">
+    <div class="car-information-item">
+      <label>Pick up:</label>
+      <p>{{reservation.pickUp}}</p>
+    </div>
+    <div class="car-information-item">
+      <label>Drop off:</label>
+      <p>{{reservation.dropOff}}</p>
+    </div>
+    <div class="car-information-item">
+      <label>Rental Location:</label>
+      <p>{{reservation.rentalLocation}}</p>
+    </div>
+    <div class="car-information-item">
+      <label>Car Type:</label>
+      <p>{{reservation.car.name}} {{reservation.car.type}}</p>
+    </div>
+    <div class="car-information-item">
+      <label>Passengers:</label>
+      <p>{{reservation.car.passengers}}</p>
+    </div>
+    <div class="car-information-item">
+      <label>Driver Name:</label>
+      <p>{{reservation.driverName}}</p>
+    </div>
+  </div>
+  <img [src]="reservation.car.imageName" class="car-information__car">
+  <div class="button-container">
+    <button type="button" class="btn btn-primary btn-lg">Modify</button>
+    <button type="button" class="btn btn-secondary btn-lg">Cancel</button>
+  </div>
+</div>
