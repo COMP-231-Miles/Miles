@@ -23,6 +23,7 @@ import { BookComponent } from './pages/book/book.component';
 import { CustomerAccountComponent } from './pages/customer-account/customer-account.component';
 import { AdminAccountComponent } from './pages/admin-account/admin-account.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
     AdminAccountComponent,
     InvoiceComponent,
     MyReservationComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

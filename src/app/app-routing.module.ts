@@ -1,3 +1,4 @@
+import { ProfileComponent } from './pages/profile/profile.component';
 import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'policies', component: PoliciesComponent, data: {title: 'Cars'}},
   {path: 'sign-up', component: SignUpComponent, data: {title: 'Cars'}},
   {path: 'my-reservation', component: MyReservationComponent },
+  {path: 'my-profile', component: ProfileComponent },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
