@@ -24,8 +24,6 @@ export class SignUpComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  get f() { return this.registerForm.controls; }
-
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
       {
