@@ -2,6 +2,7 @@
 @use './sass/abstracts/font';
 @use './sass/abstracts/mixins';
 @use './sass/abstracts/variables';
+@import 'ngx-toastr/toastr';
 
 .exo {  font-family: 'Exo', serif !important; } //Exo
 

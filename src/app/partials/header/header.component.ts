@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user.interface';
 import { LoginPayload, UserService } from './../../services/user.service';
@@ -19,6 +20,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService, 
     private router: Router,
+    private toastr: ToastrService
+
     ) {}
 
   ngOnInit(): void {
@@ -36,8 +39,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
       password: this.password,
     };
 
+    if (payload.email == null || payload.password == null) {
+      this.toastr.error('Username or password is empty');
+      return;
+    }
+
     this.userService.login(payload).pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe(() => {});
+    .subscribe({
+      error: (err) => {
+        this.toastr.error(err.message);
+      }
+    });
   }
 
   logout(): void {

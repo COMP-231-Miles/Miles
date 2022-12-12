@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, take, tap, Observable } from 'rxjs';
+import { Observable, ReplaySubject, take, tap } from 'rxjs';
 import { User } from '../models/user.interface';
 import { loginAuthentication, UserApiService } from './user-api.service';
 
@@ -16,7 +16,9 @@ export class UserService {
   private currentUserSource = new ReplaySubject<User | null>(1);
   currentUserSource$ = this.currentUserSource.asObservable();
 
-  constructor(private userApiService: UserApiService) {}
+  constructor(
+    private userApiService: UserApiService,
+    ) {}
 
   login(authData: LoginPayload): Observable<loginAuthentication> {
     return this.userApiService.login(authData).pipe(
