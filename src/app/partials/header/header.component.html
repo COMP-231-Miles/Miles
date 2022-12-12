@@ -18,7 +18,7 @@
     <div class="dropdown nav-dropdown" *ngIf="(currentUser$ | async) as user" dropdown>
       <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle> Welcome {{user.firstName}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item">Edit Profile</a>
+        <a class="dropdown-item" routerLink='/my-profile'>Profile</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" routerLink='/my-reservation'>My reservation</a>
         <div class="dropdown-divider"></div>
