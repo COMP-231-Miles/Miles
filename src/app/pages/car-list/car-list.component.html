@@ -1,13 +1,13 @@
 <section class="car-list">
   <h2 class="exo">Available Cars in {{locationToCheck}}</h2>
-  <app-search-bar (newItemEvent)="addLocation($any($event))" [placeholder]="locationToCheck"></app-search-bar>
+  <app-search-bar [placeholder]="locationToCheck"></app-search-bar>
 
   <div class="cars-space" *ngIf="areCars">
-    <app-card-car *ngFor="let car of carByLocationList" [data]="car"></app-card-car>
+    <app-card-car *ngFor="let car of availableCars" [data]="car" [dateFrom]="dateFromToCheck" [dateTo]="dateToToCheck"></app-card-car>
   </div>  
 
   <div *ngIf="!areCars">
-    <h5 class="exo">We are sorry! There are not available cars for that Location.</h5>
+    <h5 class="exo">We are sorry! There are not available cars for that Location or Dates.</h5>
   </div>  
 
 </section>

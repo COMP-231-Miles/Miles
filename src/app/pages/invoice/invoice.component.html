@@ -1,1 +1,25 @@
-<p>invoice works!</p>
+<section class="booking" id="printComponent">
+  <h2 class="exo">Invoice</h2> 
+
+  <section class="booking-card">
+    <div class="dir-row step-space">
+      <h4 class="exo blue"><b>Receipt</b></h4>
+    </div>
+  
+    <div class="dir-row desc-space">       
+      <div class="description dir-col">
+        <h4 class="exo">Reservation Details</h4> 
+        <h5>Reservation No. : </h5>
+        <h6>Name: </h6>
+        <h6>email: </h6>
+        <h6>Dates: {{dateFromToCheck}} - {{dateToToCheck}}</h6>
+        <h6>Location: {{carSelected.pickupLoc}}</h6>
+        <h6>Car Model: {{carSelected.name}}</h6>
+        <h6>Type: {{carSelected.type}}</h6>
+        <h6>Price per day: {{carSelected.price}} CAD</h6>
+        <h4 *ngIf="price > 0">Total: ${{price}} CAD</h4>
+        <button (click)="print()" class="btn btn-warning"><b>Print</b></button> 
+      </div>      
+    </div>    
+  </section>  
+</section>

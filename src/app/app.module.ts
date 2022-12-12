@@ -47,6 +47,7 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,

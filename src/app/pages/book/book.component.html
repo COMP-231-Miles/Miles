@@ -1,8 +1,75 @@
 <section class="booking">
-  <h2 class="exo">Request to book</h2> 
+  <h2 class="exo">Booking</h2> 
 
-  <h4 class="exo">Your Rent</h4>
+  <section *ngIf="!isNext" class="booking-card">
+    <div class="dir-row step-space">
+      <div class="step exo">Step 1</div>
+      <h4 class="exo blue"><b>→ Review your Information</b></h4>
+    </div>
+  
+    <div class="dir-row desc-space">       
+      <div class="description dir-col">
+        <h4 class="exo">Car Details</h4> 
+        <h6>Dates: {{dateFromToCheck}} - {{dateToToCheck}}</h6>
+        <h6>Location: {{carSelected.pickupLoc}}</h6>
+        <h6>Car Model: {{carSelected.name}}</h6>
+        <h6>Type: {{carSelected.type}}</h6>
+        <h6>Passengers: {{carSelected.passengers}}</h6>
+        <h6>Luggage: {{carSelected.luggage}}</h6>  
+        <h6>Insurance No.: {{carSelected.insurance}}</h6> 
+        <h6>Automatic: {{carSelected.isAuto}}</h6> 
+        <h6>AC: {{carSelected.ACsup}}</h6> 
+        <h6>Price per day: {{carSelected.price}} CAD</h6>
+        <h4 *ngIf="price > 0">Total: ${{price}} CAD</h4>
+      </div>
+      <div class="dir-col">
+        <img src="{{carSelected.imageName}}" alt="" width="300px" style="object-fit: contain;">  
+        <button (click)="isNext = true" class="btn btn-warning"><b>Next</b></button> 
+      </div>         
+    </div>    
+  </section>
 
-  <h6>Dates: </h6>
+  <section *ngIf="isNext" class="booking-card">
+    <div class="dir-row step-space">
+      <div class="step exo">Step 2</div>
+      <h4 class="exo blue"><b>→ Payment Information</b></h4>
+    </div>
+  
+    <div class="dir-row desc-space">    
+      <form [formGroup]="paymentForm" (ngSubmit)="onSubmit(paymentForm.value)" class="container">
+        <div class="form-row row">
+            <div class="form-group col-lg-12">
+              <label><h6>Cardholder Name <b>*</b></h6></label>
+              <input type="text" formControlName="name" [ngClass]="{'is-invalid': submitted && paymentForm.controls.name.errors}" class="form-control" placeholder="Cardholder name">
+            </div>
+            <div class="form-group col-lg-12">
+              <label><h6>Card Number <b>*</b></h6></label>
+              <input type="number" maxlength="16" minlength="16" formControlName="card" [ngClass]="{'is-invalid': submitted && paymentForm.controls.card.errors}" class="form-control" placeholder="Card Number">
+            </div>
+            <div class="form-group col-lg-4">
+              <label><h6>CVV <b>*</b></h6></label>
+              <input type="number" maxlength="3" minlength="3" formControlName="cvv" [ngClass]="{'is-invalid': submitted && paymentForm.controls.cvv.errors}" class="form-control" placeholder="CVV">
+            </div>
+            <div class="form-group col-lg-4">
+              <label><h6>Month <b>*</b></h6></label>
+              <input type="number" maxlength="2" minlength="2" max="12" min="01" formControlName="month" [ngClass]="{'is-invalid': submitted && paymentForm.controls.month.errors}" class="form-control" placeholder="00">
+            </div>
+            <div class="form-group col-lg-4">
+              <label><h6>Year <b>*</b></h6></label>
+              <input type="number" maxlength="2" minlength="2" max="27" min="22" formControlName="year" [ngClass]="{'is-invalid': submitted && paymentForm.controls.year.errors}" class="form-control" placeholder="22">
+            </div>   
+            <div class="form-group col-lg-12">
+              <label><h6>Email <b>*</b></h6></label>
+              <input type="email" formControlName="email" [ngClass]="{'is-invalid': submitted && paymentForm.controls.email.errors}" class="form-control" placeholder="Email">
+            </div>         
+        </div>      
+        <!--Buttons-->
+        <div class="dir-row buttons" style="justify-content: flex-end;">
+            <button type="submit" class="btn btn-primary"><b>Book Now</b></button>
+        </div>
+      </form>       
+    </div>    
+  </section>
+  
 
 </section>
