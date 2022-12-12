@@ -15,7 +15,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentUser$: Observable<any>; //to-do: update any to user
   ngUnsubscribe = new Subject<void>();
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService, 
+    private router: Router,
+    ) {}
 
   ngOnInit(): void {
     this.currentUser$ = this.userService.currentUserSource$;
@@ -40,5 +43,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.userService.logout();
     this.router.navigateByUrl('/');
+  }
+  
+  navigateToRegister() {
+    this.router.navigate(['sign-up'])
   }
 }

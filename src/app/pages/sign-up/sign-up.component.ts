@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -10,7 +11,7 @@ import {
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
   registerForm: FormGroup;
@@ -18,7 +19,12 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   preview: string = '';
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {}
+
+  get f() { return this.registerForm.controls; }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
