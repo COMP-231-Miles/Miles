@@ -43,4 +43,8 @@ export class UserService {
   register(payload: User): Observable<any> {
     return this.userApiService.register(payload);
   }
+
+  updateUserInfo(id: any, payload: any): Observable<any> {
+    return this.userApiService.updateUserInfo(id, payload);
+  }
 }

@@ -102,4 +102,26 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
+//update user info
+router.put('/userInfo/:id', async (req, res, next) => {
+  const updatedUser = new User({
+    _id: req.body._id,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    phone: req.body.phone,
+    address: req.body.address
+  });
+  console.log('put called', updatedUser);
+  const user = User.findById(req.body._id);
+  console.log('user',  user);
+  if (!user) return res.status(404).send("User not found");
+  await User.findByIdAndUpdate(req.body._id , updatedUser, { new: true}).then(result => {
+    console.log('result', result);
+    res.status(200).json({ 
+      message: 'Updated successful!',
+      data: result
+    });
+  })
+});
+
 module.exports = router;

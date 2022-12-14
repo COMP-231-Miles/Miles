@@ -19,7 +19,7 @@ export class UserApiService {
 
   login(body: LoginPayload): Observable<loginAuthentication> {
     return this.httpClient
-      .post<loginAuthentication>('http://localhost:3000/api/user/login', body)
+      .post<loginAuthentication>('http://localhost:3000/api/user/login',  body)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           return throwError(() => err.error);
@@ -30,6 +30,16 @@ export class UserApiService {
   register(body: User): Observable<User> {
     return this.httpClient
       .post<User>('http://localhost:3000/api/user/signup', body)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return throwError(() => err.error);
+        })
+      );
+  }
+
+  updateUserInfo(id: any, body: any): Observable<User> {
+    return this.httpClient
+      .put<any>('http://localhost:3000/api/user/userInfo/' + id, body)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           return throwError(() => err.error);

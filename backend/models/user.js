@@ -4,7 +4,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const AddressSchema = mongoose.Schema({
   city:  { type: String },
   street:  { type: String },
-  county:  { type: String },
+  country:  { type: String },
 });
 
 const DriverLicenseSchema = mongoose.Schema({

@@ -2,6 +2,7 @@
 @use './sass/abstracts/font';
 @use './sass/abstracts/mixins';
 @use './sass/abstracts/variables';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
 .exo {  font-family: 'Exo', serif !important; } //Exo
 
@@ -17,5 +18,15 @@
 .blue {
   color: #0d6efd;
 }
+//Remove Arrows/Spinners for input
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
