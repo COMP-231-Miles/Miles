@@ -29,6 +29,18 @@ h4 { margin: 0}
     justify-content: space-around;
   }
 }
+
+button {margin-top: 20px;}
+
+.desc-space {
+  justify-content: space-around;
+  padding: 20px;
+  gap: 20px;
+  h4 {margin-bottom: 20px;}
+  .dir-col {
+    justify-content: space-around;
+  }
+}
 .step-space {
   justify-content: flex-start;
   align-items: center;
