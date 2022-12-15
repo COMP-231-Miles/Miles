@@ -1,59 +1,87 @@
-body{margin-top:20px;
-  color: #9b9ca1;
+@use '../../../sass/abstracts/variables' as c;
+
+.profile-wrapper {
+  padding: 30px;
+  margin: 30px;
+  background: #F5F5F5;
+  .user-info-header {
+    display: flex;
+    align-items: center;
+
+    &__title {
+      margin-right: 6px;
+    }
+
+    &__icon-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid c.$dark-grey;
+      border-radius: 50%;
+      width: 1.5em;
+      height: 1.5em;
+      justify-content: center;
+      padding: 14px;
+      .bi-pencil {
+        color: #2C87F0;
+      }
+    }
+
+    &__icon-box:hover {
+      background: #E0E0E0;
+    }
   }
-  .bg-secondary-soft {
-      background-color: rgba(208, 212, 217, 0.1) !important;
+
+  .user-info, .edit-password {
+    padding: 10px;
+
+    .user-info__label {
+      font-size: 18px;
+      flex-basis: 140px;
+    }
+
+    .edit-password__label {
+      font-size: 18px;
+      flex-basis: 180px;
+    }
+
+    .input-container-row {
+      display: flex;
+      margin-bottom: 6px;
+    }
+
+    .user-info-name {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    .input-container-row > input {
+      border: 1px solid c.$dark-grey;
+      border-radius: 4px;
+      padding: 0px 8px;
+      width: 20%;
+    }
+    
+    &__alert {
+      color: #c5404c;
+    }
   }
-  .rounded {
-      border-radius: 5px !important;
+
+  button {
+    margin:8px;
   }
-  .py-5 {
-      padding-top: 3rem !important;
-      padding-bottom: 3rem !important;
+
+  .user-license-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    .license {
+      display: flex;
+    }
   }
-  .px-4 {
-      padding-right: 1.5rem !important;
-      padding-left: 1.5rem !important;
-  }
-  .file-upload .square {
-      height: 250px;
-      width: 250px;
-      margin: auto;
-      vertical-align: middle;
-      border: 1px solid #e5dfe4;
-      background-color: #fff;
-      border-radius: 5px;
-  }
-  .text-secondary {
-      --bs-text-opacity: 1;
-      color: rgba(208, 212, 217, 0.5) !important;
-  }
-  .btn-success-soft {
-      color: #28a745;
-      background-color: rgba(40, 167, 69, 0.1);
-  }
-  .btn-danger-soft {
-      color: #dc3545;
-      background-color: rgba(220, 53, 69, 0.1);
-  }
-  .form-control {
-      display: block;
-      width: 100%;
-      padding: 0.5rem 1rem;
-      font-size: 0.9375rem;
-      font-weight: 400;
-      line-height: 1.6;
-      color: #29292e;
-      background-color: #fff;
-      background-clip: padding-box;
-      border: 1px solid #e5dfe4;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      border-radius: 5px;
-      -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-      transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-  }
-  
+
+}
+
+.divider {
+  border-bottom: 1px solid #bbb;
+}

@@ -1,122 +1,215 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <!-- Page title -->
-      <div class="my-5">
-        <h3>My Profile</h3>
-        <hr />
+<div class="profile-wrapper" *ngIf="profile">
+  <div class="user-info-container">
+    <div class="user-info-header">
+      <h3 class="user-info-header__title">User info</h3>
+      <div class="user-info-header__icon-box">
+        <i class="bi bi-pencil" (click)="callEditMode('userInfo')"></i>
       </div>
-      <!-- Form START -->
-      <form class="file-upload">
-        <div class="row mb-5 gx-5">
-          <!-- Contact detail -->
-          <div class="col-xxl-8 mb-5 mb-xxl-0">
-            <div class="bg-secondary-soft px-4 py-5 rounded">
-              <div class="row g-3">
-                <!-- First Name -->
-                <div class="col-md-6">
-                  <label class="form-label">First Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder=""
-                    aria-label="First name"
-                    id="fName" />
-                </div>
-                <!-- Last name -->
-                <div class="col-md-6">
-                  <label class="form-label">Last Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder=""
-                    aria-label="Last name"
-                    id="lName" />
-                </div>
-                <!-- Date of Birt-->
-                <div class="col-md-6">
-                  <label class="form-label">Date of birth</label>
-                  <input
-                    type="date"
-                    class="form-control"
-                    aria-label="Date of birth"
-                    id="DOB" />
-                </div>
-                <!-- Gender -->
-                <div class="col-md-6">
-                  <label class="form-label">Gender</label>
-                  <input
-                    type="text"
-                    list="gender"
-                    class="form-control"
-                    id="gender" />
-                  <datalist id="gender">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Prefer not to say</option>
-                  </datalist>
-                </div>
-                <!--Nationality-->
-                <div class="col-md-6">
-                  <label class="form-label">Nationality</label>
-                  <input type="text" class="form-control" id="Nationality" />
-                </div>
-                <!-- Address -->
-                <div class="col-md-6">
-                  <label class="form-label">Address</label>
-                  <input type="text" class="form-control" id="Address" />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">City</label>
-                  <input type="text" class="form-control" id="City" />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Country</label>
-                  <input type="text" class="form-control" id="Country" />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Postal Code</label>
-                  <input type="text" class="form-control" id="Postal Code" />
-                </div>
-                <!-- Mobile number -->
-                <div class="col-md-6">
-                  <label class="form-label">Mobile number</label>
-                  <input type="text" class="form-control" id="number" />
-                </div>
-                <!-- Email -->
-                <div class="col-md-6">
-                  <label for="inputEmail4" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" />
-                </div>
-                <!-- Driver's License Number -->
-                <div class="col-md-6">
-                  <label class="form-label">Driver's License Number</label>
-                  <input type="text" class="form-control" id="licenseNumber" />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Country Issued</label>
-                  <input type="text" class="form-control" id="countryIssued" />
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Date Issued</label>
-                  <input type="text" class="form-control" id="dateIssued" />
-                </div>
-              </div>
-              <!-- Row END -->
+    </div>
+    <ng-container class="user-info-container" *ngIf="updateInfoPops.userInfo; then editUserInfo; else userInfo"></ng-container>
+    <ng-template #userInfo>
+      <div class="user-info">
+        <div class="input-container-row">
+          <label class="user-info__label">email: </label>
+          <span>{{profile.email}}</span>
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Name: </label>
+          <span>{{profile.firstName}} {{profile.lastName}}</span>
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Contact: </label>
+          <span>{{profile.phone}}</span>
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Date of Birth: </label>
+          <span>{{profile.DOB}}</span>
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Address: </label>
+          <span>
+            {{profile.address.street}}&nbsp;
+            {{profile.address.city}}&nbsp;
+            {{profile.address.province}}&nbsp;
+            {{profile.address.postalCode}}&nbsp;
+          </span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #editUserInfo>
+      <div class="user-info">
+        <div class="input-container-row">
+          <label class="user-info__label">First Name: </label>
+          <input 
+            [(ngModel)]="profile.firstName"
+            type="text"
+            required  
+          />
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Last Name: </label>
+          <input 
+            [(ngModel)]="profile.lastName"
+            type="text"
+            required 
+          />
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Contact: </label>
+          <input 
+            [(ngModel)]="profile.phone"
+            type="number"
+            maxlength="10"
+            required 
+          />
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Street: </label>
+          <input 
+            [(ngModel)]="profile.address.street"
+            type="text"
+            required  
+          />
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">City: </label>
+          <input 
+            [(ngModel)]="profile.address.city"
+            type="text"
+            required 
+          />
+        </div>
+        <div class="input-container-row">
+          <label class="user-info__label">Country: </label>
+          <input 
+            [(ngModel)]="profile.address.country"
+            type="text"
+            required 
+          />
+        </div>
+        <button type="button" class="btn btn-primary" (click)="updateUserInfo()">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="callEditMode('userInfo')">Cancel</button>
+      </div>
+    </ng-template>
+  </div>
+  <hr class="divider"/>
+  <div class="user-license-container">
+    <div>
+      <div class="user-info-header">
+        <h3 class="user-info-header__title">Driver License</h3>
+        <div class="user-info-header__icon-box">
+          <i class="bi bi-pencil" (click)="callEditMode('driverLicense')"></i>
+        </div>
+      </div>
+        <ng-container class="user-info-container" *ngIf="updateInfoPops.driverLicense; then editDriverLicense; else driverLicense"></ng-container>
+        <ng-template #driverLicense>
+          <div class="user-info">
+            <div class="input-container-row">
+              <label class="user-info__label">Number: </label>
+              <span>{{profile.driverLicense.number}}</span>
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Country Issued: </label>
+              <span>{{profile.driverLicense.countryIssued}}</span>
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Date Issued: </label>
+              <span>{{profile.driverLicense.dateIssued}}</span>
             </div>
           </div>
+        </ng-template>
+
+        <ng-template #editDriverLicense>
+          <div class="user-info">
+            <div class="input-container-row">
+              <label class="user-info__label">Number: </label>
+              <input 
+                [(ngModel)]="profile.driverLicense.number"
+                type="text"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Country Issued: </label>
+              <input 
+                [(ngModel)]="profile.driverLicense.countryIssued"
+                type="text"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Date Issued: </label>
+              <input 
+                [(ngModel)]="profile.driverLicense.dateIssued"
+                type="date"
+                required  
+              />
+            </div>
+            <button type="button" class="btn btn-primary" (click)="updateDriverLicense()">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="callEditMode('driverLicense')">Cancel</button>
+          </div>
+        </ng-template>
+      </div>
+    <div>
+      <div class="user-info-header">
+        <h3 class="user-info-header__title">PASSWORD</h3>
+        <div class="user-info-header__icon-box">
+          <i class="bi bi-pencil" (click)="callEditMode('password')"></i>
         </div>
-        <!-- button -->
-        <div class="gap-3 d-md-flex justify-content-md-end text-center">
-          <button type="button" class="btn btn-danger btn-lg">
-            Delete profile
-          </button>
-          <button type="button" class="btn btn-primary btn-lg">
-            Update profile
-          </button>
-        </div>
-      </form>
-      <!-- Form END -->
+      </div>
+        <ng-container class="user-info-container" *ngIf="updateInfoPops.password; then editPassword; else password"></ng-container>
+        <ng-template #password>
+          <p>Edit your Password</p>
+        </ng-template>
+
+        <ng-template #editPassword>
+          <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()" class="edit-password">
+            <div class="input-container-row">
+              <label class="edit-password__label">Current Password: </label>
+              <input 
+                type="password"
+                formControlName="currentPassword"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="edit-password__label">New Password: </label>
+              <input 
+                type="password"
+                formControlName="password"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="edit-password__label">Confirm Password: </label>
+              <input 
+                type="password"
+                formControlName="confirmPassword"
+                required  
+              />
+            </div>
+            <div class="edit-password__alert">
+              <div *ngIf="passwordForm?.errors?.['mismatch']">
+                password does not match
+              </div>
+              <div *ngIf="!checkCurrentPassword && (currentPassword?.touched || currentPassword?.dirty) && submitted">current password is wrong</div>
+              <div
+              *ngIf="currentPassword?.errors?.['required'] && currentPassword?.invalid && (currentPassword?.touched || currentPassword?.dirty) && submitted">
+              password is required
+            </div>
+              <div
+              *ngIf="newPassword?.errors?.['required'] && newPassword?.invalid && (newPassword?.touched || newPassword?.dirty) && submitted">
+              password is required
+            </div>
+              <div
+              *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty) && submitted">
+              confirm password is required
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="callEditMode('password')">Cancel</button>
+          </form>
+        </ng-template>
     </div>
   </div>
 </div>
