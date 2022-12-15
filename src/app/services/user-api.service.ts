@@ -46,4 +46,24 @@ export class UserApiService {
         })
       );
   }
+
+  updateDriverLicense(id: any, body: any): Observable<User> {
+    return this.httpClient
+      .put<any>('http://localhost:3000/api/user/driverLicense/' + id, body)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return throwError(() => err.error);
+        })
+      );
+  }
+
+  resetPassword(id: any, body: any): Observable<User> {
+    return this.httpClient
+      .put<any>('http://localhost:3000/api/user/resetPassword/' + id, body)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return throwError(() => err.error);
+        })
+      );
+  }
 }

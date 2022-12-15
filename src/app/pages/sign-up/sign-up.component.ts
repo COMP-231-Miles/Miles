@@ -69,7 +69,6 @@ export class SignUpComponent implements OnInit {
       return;
     }
     const payload: User = this.registerForm.value;
-
     this.userService
       .register(payload)
       .pipe(takeUntil(this.ngUnsubscribe))

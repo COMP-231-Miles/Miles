@@ -111,17 +111,54 @@ router.put('/userInfo/:id', async (req, res, next) => {
     phone: req.body.phone,
     address: req.body.address
   });
-  console.log('put called', updatedUser);
   const user = User.findById(req.body._id);
-  console.log('user',  user);
   if (!user) return res.status(404).send("User not found");
-  await User.findByIdAndUpdate(req.body._id , updatedUser, { new: true}).then(result => {
-    console.log('result', result);
+  await User.findByIdAndUpdate(req.body._id , updatedUser, { new: true }).then(result => {
+    console.log('userInfo called');
     res.status(200).json({ 
       message: 'Updated successful!',
       data: result
     });
   })
 });
+//update driver license
+router.put('/driverLicense/:id', async (req, res, next) => {
+  const updatedDriverLicense = new User({
+    _id: req.body._id,
+    driverLicense: req.body.driverLicense
+  });
+  const user = User.findById(req.body._id);
+  if (!user) return res.status(404).send("User not found");
+  await User.findByIdAndUpdate(req.body._id , updatedDriverLicense, { new: true}).then(result => {
+    res.status(200).json({ 
+      message: 'Updated driver license successful!',
+      data: result
+    });
+  })
+});
+
+//reset password
+router.put('/resetPassword/:id', async (req, res, next) => {
+  bcrypt.hash(req.body.password, 10)
+  .then(hash => {
+    const updatedPassword = new User({
+      _id: req.body._id,
+      password: hash
+    });
+    const user = User.findById(req.body._id);
+    if (!user) return res.status(404).send("User not found");
+    User.findByIdAndUpdate(req.body._id , updatedPassword, { new: true}).then(result => {
+      console.log('resetPassword called');
+  
+      res.status(200).json({ 
+        message: 'Updated password successful!',
+        data: result
+      });
+    })
+  })
+
+
+});
+
 
 module.exports = router;

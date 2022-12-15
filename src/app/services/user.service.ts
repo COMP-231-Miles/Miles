@@ -47,4 +47,12 @@ export class UserService {
   updateUserInfo(id: any, payload: any): Observable<any> {
     return this.userApiService.updateUserInfo(id, payload);
   }
+
+  updateDriverLicense(id: any, payload: any): Observable<any> {
+    return this.userApiService.updateDriverLicense(id, payload);
+  }
+
+  resetPassword(id: any, payload: any): Observable<any> {
+    return this.userApiService.resetPassword(id, payload);
+  }
 }

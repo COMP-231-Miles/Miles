@@ -24,6 +24,7 @@ import { CustomerAccountComponent } from './pages/customer-account/customer-acco
 import { AdminAccountComponent } from './pages/admin-account/admin-account.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot({
+      positionClass :'toast-bottom-right'
+    })
   ],
   providers: [
     UserApiService,

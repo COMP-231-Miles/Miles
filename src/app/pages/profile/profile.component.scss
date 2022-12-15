@@ -3,8 +3,7 @@
 .profile-wrapper {
   padding: 30px;
   margin: 30px;
-  background: c.$white-smoke;
-
+  background: #F5F5F5;
   .user-info-header {
     display: flex;
     align-items: center;
@@ -32,12 +31,17 @@
     }
   }
 
-  .user-info {
+  .user-info, .edit-password {
     padding: 10px;
 
-    &__label {
+    .user-info__label {
       font-size: 18px;
       flex-basis: 140px;
+    }
+
+    .edit-password__label {
+      font-size: 18px;
+      flex-basis: 180px;
     }
 
     .input-container-row {
@@ -57,9 +61,27 @@
       padding: 0px 8px;
       width: 20%;
     }
-
+    
+    &__alert {
+      color: #c5404c;
+    }
   }
+
   button {
     margin:8px;
   }
+
+  .user-license-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    .license {
+      display: flex;
+    }
+  }
+
+}
+
+.divider {
+  border-bottom: 1px solid #bbb;
 }

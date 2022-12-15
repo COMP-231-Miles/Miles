@@ -6,7 +6,7 @@
         <i class="bi bi-pencil" (click)="callEditMode('userInfo')"></i>
       </div>
     </div>
-    <ng-container *ngIf="updateInfoPops.userInfo; then editUserInfo; else userInfo"></ng-container>
+    <ng-container class="user-info-container" *ngIf="updateInfoPops.userInfo; then editUserInfo; else userInfo"></ng-container>
     <ng-template #userInfo>
       <div class="user-info">
         <div class="input-container-row">
@@ -92,5 +92,124 @@
       </div>
     </ng-template>
   </div>
+  <hr class="divider"/>
+  <div class="user-license-container">
+    <div>
+      <div class="user-info-header">
+        <h3 class="user-info-header__title">Driver License</h3>
+        <div class="user-info-header__icon-box">
+          <i class="bi bi-pencil" (click)="callEditMode('driverLicense')"></i>
+        </div>
+      </div>
+        <ng-container class="user-info-container" *ngIf="updateInfoPops.driverLicense; then editDriverLicense; else driverLicense"></ng-container>
+        <ng-template #driverLicense>
+          <div class="user-info">
+            <div class="input-container-row">
+              <label class="user-info__label">Number: </label>
+              <span>{{profile.driverLicense.number}}</span>
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Country Issued: </label>
+              <span>{{profile.driverLicense.countryIssued}}</span>
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Date Issued: </label>
+              <span>{{profile.driverLicense.dateIssued}}</span>
+            </div>
+          </div>
+        </ng-template>
 
+        <ng-template #editDriverLicense>
+          <div class="user-info">
+            <div class="input-container-row">
+              <label class="user-info__label">Number: </label>
+              <input 
+                [(ngModel)]="profile.driverLicense.number"
+                type="text"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Country Issued: </label>
+              <input 
+                [(ngModel)]="profile.driverLicense.countryIssued"
+                type="text"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="user-info__label">Date Issued: </label>
+              <input 
+                [(ngModel)]="profile.driverLicense.dateIssued"
+                type="date"
+                required  
+              />
+            </div>
+            <button type="button" class="btn btn-primary" (click)="updateDriverLicense()">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="callEditMode('driverLicense')">Cancel</button>
+          </div>
+        </ng-template>
+      </div>
+    <div>
+      <div class="user-info-header">
+        <h3 class="user-info-header__title">PASSWORD</h3>
+        <div class="user-info-header__icon-box">
+          <i class="bi bi-pencil" (click)="callEditMode('password')"></i>
+        </div>
+      </div>
+        <ng-container class="user-info-container" *ngIf="updateInfoPops.password; then editPassword; else password"></ng-container>
+        <ng-template #password>
+          <p>Edit your Password</p>
+        </ng-template>
+
+        <ng-template #editPassword>
+          <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()" class="edit-password">
+            <div class="input-container-row">
+              <label class="edit-password__label">Current Password: </label>
+              <input 
+                type="password"
+                formControlName="currentPassword"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="edit-password__label">New Password: </label>
+              <input 
+                type="password"
+                formControlName="password"
+                required  
+              />
+            </div>
+            <div class="input-container-row">
+              <label class="edit-password__label">Confirm Password: </label>
+              <input 
+                type="password"
+                formControlName="confirmPassword"
+                required  
+              />
+            </div>
+            <div class="edit-password__alert">
+              <div *ngIf="passwordForm?.errors?.['mismatch']">
+                password does not match
+              </div>
+              <div *ngIf="!checkCurrentPassword && (currentPassword?.touched || currentPassword?.dirty) && submitted">current password is wrong</div>
+              <div
+              *ngIf="currentPassword?.errors?.['required'] && currentPassword?.invalid && (currentPassword?.touched || currentPassword?.dirty) && submitted">
+              password is required
+            </div>
+              <div
+              *ngIf="newPassword?.errors?.['required'] && newPassword?.invalid && (newPassword?.touched || newPassword?.dirty) && submitted">
+              password is required
+            </div>
+              <div
+              *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty) && submitted">
+              confirm password is required
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="callEditMode('password')">Cancel</button>
+          </form>
+        </ng-template>
+    </div>
+  </div>
 </div>
