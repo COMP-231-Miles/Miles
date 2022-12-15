@@ -43,8 +43,6 @@ export class ProfileComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.toastr.info('callled!');
-
     this.userService.currentUserSource$.pipe(take(1)).subscribe(profile => {
       this.profile = profile;
     });
@@ -85,6 +83,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(res => {
         if (res.data) {
           this.updateInfoPops.userInfo = !this.updateInfoPops.userInfo;
+          this.toastr.success('User information updated!');
         }
       });
   }
@@ -99,6 +98,7 @@ export class ProfileComponent implements OnInit {
     .subscribe(res => {
       if (res.data) {
         this.updateInfoPops.driverLicense = !this.updateInfoPops.driverLicense;
+        this.toastr.success('Driver license updated!');
       }
     });
   }
