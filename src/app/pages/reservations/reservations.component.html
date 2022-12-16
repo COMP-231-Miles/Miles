@@ -1,0 +1,22 @@
+<section class="car-list" *ngIf="!isAdd">
+  <h2 class="exo">Reservations</h2>
+  <div style="width: 70%;" class="dir-col">
+    <button (click)="isAdd = true" class="btn btn-primary" style="align-self: flex-end; margin-bottom: 5px;">Add Reservation</button>
+  </div>  
+
+  <table class="table1">    
+    <tr  class="">
+        <th *ngFor="let h of headers"><h5 class="rto red-logo">{{h}}</h5></th>               
+    </tr>
+    <tr *ngFor="let car of carList">
+        <td>{{car.userID}}</td>
+        <td>{{car.carID}}</td>
+        <td>{{car.location}}</td>
+        <td>{{car.price}}</td>
+        <td><div class="btns">
+          <button><fa-icon [icon]="pencil"></fa-icon></button>
+          <button><fa-icon [icon]="garbage" style="color: red;"></fa-icon></button>
+        </div></td>
+    </tr>
+  </table> 
+</section>

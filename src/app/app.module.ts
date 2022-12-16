@@ -25,6 +25,11 @@ import { AdminAccountComponent } from './pages/admin-account/admin-account.compo
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { InventoryComponent } from './pages/inventory/inventory.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -44,6 +49,9 @@ import { ToastrModule } from 'ngx-toastr';
     InvoiceComponent,
     MyReservationComponent,
     ProfileComponent,
+    ContactUsComponent,
+    InventoryComponent,
+    ReservationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +62,8 @@ import { ToastrModule } from 'ngx-toastr';
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    GoogleMapsModule,
+    FontAwesomeModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),

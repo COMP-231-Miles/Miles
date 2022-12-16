@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +41,18 @@ export class CarService {
 
   getCarById(id:string) {
     return this.httpClient.get<any>('http://localhost:3000/api/car/'+id);
+  }
+
+  deleteCarById(id: string) {
+    return this.httpClient.get<any>('http://localhost:3000/api/car/delete/'+id);
+  }
+
+  addCar(body: FormData): Observable<any> {
+    return this.httpClient.post<any>('http://localhost:3000/api/car', body)
+    .pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => err.error);
+      })
+    );
   }
 }

@@ -4,7 +4,7 @@
     <app-search-bar [placeholder]="locationToCheck"></app-search-bar>
 
     <div class="cars-space" *ngIf="areCars">
-      <app-card-car *ngFor="let car of availableCars" [data]="car" [dateFrom]="dateFromToCheck" [dateTo]="dateToToCheck"></app-card-car>
+      <app-card-car *ngFor="let car of availableCars" [data]="car" [dateFrom]="dateFromToCheck" [dateTo]="dateToToCheck" [isInventory]="false"></app-card-car>
     </div>  
 
     <div *ngIf="!areCars">

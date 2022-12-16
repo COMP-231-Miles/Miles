@@ -1,0 +1,74 @@
+<section class="car-list" *ngIf="!isAdd">
+  <h2 class="exo">Inventory</h2>
+  <div style="width: 70%;" class="dir-col">
+    <button (click)="isAdd = true" class="btn btn-primary" style="align-self: flex-end; margin-bottom: 5px;">Add Car</button>
+  </div>  
+
+  <table class="table1">    
+    <tr  class="">
+        <th *ngFor="let h of headers"><h5 class="rto red-logo">{{h}}</h5></th>               
+    </tr>
+    <tr *ngFor="let car of carList">
+        <td>{{car.name}}</td>
+        <td>{{car.type}}</td>
+        <td>{{car.pickupLoc}}</td>
+        <td>{{car.insurance}}</td>
+        <td>{{car.price}}</td>
+        <td><div class="btns">
+          <button><fa-icon [icon]="pencil"></fa-icon></button>
+          <button (click)="onDelete(car)"><fa-icon [icon]="garbage" style="color: red;"></fa-icon></button>
+        </div></td>
+    </tr>
+  </table> 
+</section>
+
+<section *ngIf="isAdd" class="car-list">
+  <h2 class="exo">Add Car</h2>
+  <form [formGroup]="carForm" (ngSubmit)="onAddCar(carForm.value)" class="add-space dir-col" style="align-self: center;">
+    <div class="dir-row">
+        <label for="">Name: </label>
+        <input type="text" formControlName="name" [ngClass]="{'is-invalid': submitted && carForm.controls.name.errors}" 
+        placeholder="Enter name" class="form-control">
+    </div>
+    <div class="dir-row">
+        <label for="">Type: </label>
+        <input type="text" formControlName="type" [ngClass]="{'is-invalid': submitted && carForm.controls.type.errors}" 
+        placeholder="Enter type" class="form-control">
+    </div>
+    <div class="dir-row">
+      <label for="">Location: </label>
+      <input type="text" formControlName="location" [ngClass]="{'is-invalid': submitted && carForm.controls.location.errors}" 
+      placeholder="Enter Location" class="form-control">
+    </div>
+    <div class="dir-row">
+        <label for="">Insurance: </label>
+        <input type="text" formControlName="insurance" [ngClass]="{'is-invalid': submitted && carForm.controls.insurance.errors}" 
+        placeholder="Enter Insurance" class="form-control">
+    </div>
+    <div class="dir-row">
+      <label for="">Price: </label>
+      <input type="number" formControlName="price" [ngClass]="{'is-invalid': submitted && carForm.controls.price.errors}" 
+      placeholder="Enter Location" class="form-control">
+    </div>
+    <div class="dir-row">
+        <label for="">Passengers: </label>
+        <input type="number" formControlName="passengers" [ngClass]="{'is-invalid': submitted && carForm.controls.passengers.errors}" 
+        placeholder="Enter Passengers" class="form-control">
+    </div>
+    <div class="dir-row">
+      <label for="">Luggage: </label>
+      <input type="number" formControlName="luggage" [ngClass]="{'is-invalid': submitted && carForm.controls.luggage.errors}" 
+      placeholder="Enter Luggage" class="form-control">
+    </div>
+    <div class="dir-row">
+        <label for="">Image: </label>
+        <input type="text" formControlName="image" [ngClass]="{'is-invalid': submitted && carForm.controls.image.errors}" 
+        placeholder="Enter Image Link" class="form-control">
+    </div>    
+    <div class="dir-row center">
+        <button class="btn btn-secondary" (click)="isAdd = false">CANCEL</button>
+        <button class="btn btn-primary" type="submit">ADD</button>
+    </div>
+</form>
+
+</section>

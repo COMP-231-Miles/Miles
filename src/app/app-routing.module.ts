@@ -9,6 +9,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { PoliciesComponent } from './pages/policies/policies.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
@@ -16,7 +19,10 @@ const routes: Routes = [
   {path: 'book/:car/:location/:dateFrom/:dateTo', component: BookComponent, data: {title: 'Booking'}},
   {path: 'invoice/:car/:location/:dateFrom/:dateTo/:reservation', component: InvoiceComponent, data: {title: 'Cars'}},
   {path: 'policies', component: PoliciesComponent, data: {title: 'Cars'}},
+  {path: 'contact-us', component: ContactUsComponent, data: {title: 'Contact Us'}},
   {path: 'sign-up', component: SignUpComponent, data: {title: 'Cars'}},
+  {path: 'reservations', component: ReservationsComponent, data: {title: 'Reservations'}},
+  {path: 'inventory', component: InventoryComponent, data: {title: 'Inventory'}},
   {path: 'my-reservation', component: MyReservationComponent },
   {path: 'my-profile', component: ProfileComponent },
   {path: '', redirectTo: '/home', pathMatch: 'full'},

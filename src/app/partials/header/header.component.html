@@ -7,7 +7,7 @@
           <a class="nav-link" aria-current="page" routerLink='/policies' routerLinkActive='active'>Policies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink='#' routerLinkActive='active'>Contact Us</a>
+          <a class="nav-link" routerLink='/contact-us' routerLinkActive='active'>Contact Us</a>
         </li>
         <li class="nav-item" *ngIf="currentUser$ | async">
           <a class="nav-link" (click)="logout()" href="#">Logout</a>
@@ -22,6 +22,12 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" routerLink='/my-reservation'>My reservation</a>
         <div class="dropdown-divider"></div>
+        <div *ngIf="user.userType == 'admin'">
+          <a class="dropdown-item" routerLink='/inventory'>Inventory</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink='/reservations'>Reservations</a>
+          <div class="dropdown-divider"></div>
+        </div>        
         <a class="dropdown-item" (click)="logout()">Logout</a>
       </div>
     </div>

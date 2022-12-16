@@ -1,4 +1,4 @@
-<div class="car-card dir-row">
+<div class="car-card dir-row" *ngIf="!isInventory">
   <img src="{{data.imageName}}" alt="" style="object-fit: contain;">
   <div class="dir-col">
     <div class="dir-row">
@@ -15,3 +15,22 @@
     <a routerLink="/book/{{data._id}}/{{data.pickupLoc}}/{{dateFrom}}/{{dateTo}}"><button class="btn btn-warning">Book</button></a>
   </div> 
 </div>
+
+<div class="car-card dir-row" *ngIf="isInventory">
+  <img src="{{data.imageName}}" alt="" style="object-fit: contain;">
+  <div class="dir-col">
+    <div class="dir-row">
+      <h3 class="exo">{{data.name}}</h3>
+      <h3 class="exo">${{data.price}}</h3>
+    </div>
+    <div class="info">
+      <h6 class="exo">Type: {{data.type}}</h6>
+      <h6 class="exo">Passengers: {{data.passengers}}</h6>
+      <h6 class="exo">Luggage: {{data.luggage}}</h6>
+      <h6 class="exo">Pick-up Location: {{data.pickupLoc}}</h6>
+      <h6 class="exo">Insurance N°: {{data.insurance}}</h6>
+    </div>    
+  </div> 
+</div>
+
+

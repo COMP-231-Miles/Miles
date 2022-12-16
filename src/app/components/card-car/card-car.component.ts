@@ -10,6 +10,8 @@ export class CardCarComponent implements OnInit {
   @Input() dateFrom! : any;
   @Input() dateTo! : any;
 
+  @Input() isInventory: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {

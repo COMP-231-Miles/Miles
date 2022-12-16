@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentUser$: Observable<User | null>;
   ngUnsubscribe = new Subject<void>();
 
+  user: any = [];
+
   constructor(
     private userService: UserService, 
     private router: Router,
@@ -26,6 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser$ = this.userService.currentUserSource$;
+    this.user = this.currentUser$;
   }
 
   ngOnDestroy(): void {
