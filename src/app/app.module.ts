@@ -30,6 +30,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { InventoryComponent } from './pages/inventory/inventory.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ContactUsComponent,
     InventoryComponent,
     ReservationsComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
