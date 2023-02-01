@@ -14,16 +14,17 @@ export class SearchBarComponent implements OnInit {
   @Input() placeholder: String = 'Search';
 
   constructor(private router: Router) { }
-
+  locations = ['Brampton'];
   date = new Date;
   isloc: boolean = true;
   isdf: boolean = true;
   isdt: boolean = true;
+  location: string;
 
-  goTo(loc: string, df: string, dt: string) {
+  goTo(df: string, dt: string) {
     const dateF = new Date(df);
     const dateT = new Date(dt);
-    if(loc.length < 1){
+    if(!this.location){
       alert('⚠️ You must complete all the fields');
       this.isloc = false;
       return;
@@ -43,11 +44,15 @@ export class SearchBarComponent implements OnInit {
       this.isdt = false;
       return;
     } else {
-      this.router.navigateByUrl('/car-list/'+loc+'/'+df+'/'+dt);
+      this.router.navigateByUrl('/car-list/'+ this.location+'/'+df+'/'+dt);
     }    
   }
   ngOnInit(): void {
     
+  }
+
+  changeLocation(event: any): void {
+    this.location = event.target.value;
   }
 
 }

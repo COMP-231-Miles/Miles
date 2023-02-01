@@ -1,18 +1,33 @@
 <form class="dir-row" role="search" id="searcBar">
   <div class="dir-col">
     <label for="search">Enter Pick-up Location</label>
-    <input class="form-control me-2" type="search" placeholder="{{placeholder}}" #loc [ngClass]="{'is-invalid': !isloc}">
+    <select class="form-control me-2" (change)="changeLocation($event)">
+      <option value="">Choose Location</option>
+      <option *ngFor="let city of locations" [ngValue]="city">
+        {{ city }}
+      </option>
+    </select>
   </div>
   <div class="dir-col">
     <label for="search">Enter Pick-up Date</label>
     <!-- <input class="form-control me-2" type="date" #dateFrom min="{{date | date:'yyyy-MM-dd'}}" [ngClass]="{'is-invalid': !isdf}"> -->
-    <input class="form-control me-2" type="date" #dateFrom [ngClass]="{'is-invalid': !isdf}">
+    <input
+      class="form-control me-2"
+      type="date"
+      #dateFrom
+      [ngClass]="{ 'is-invalid': !isdf }" />
   </div>
   <div class="dir-col">
     <label for="search">Enter Return Date</label>
     <!-- <input class="form-control me-2" type="date" #dateTo min="{{date | date:'yyyy-MM-dd'}}" [ngClass]="{'is-invalid': !isdt}"> -->
-    <input class="form-control me-2" type="date" #dateTo [ngClass]="{'is-invalid': !isdt}">
-  </div>  
-  <button (click)="goTo(loc.value, dateFrom.value, dateTo.value)" class="btn btn-warning">Search</button> 
-  <!-- <a href="/car-list/{{loc.value}}/{{dateFrom.value}}/{{dateTo.value}}" class="btn btn-warning">Search</a>     -->  
+    <input
+      class="form-control me-2"
+      type="date"
+      #dateTo
+      [ngClass]="{ 'is-invalid': !isdt }" />
+  </div>
+  <button (click)="goTo(dateFrom.value, dateTo.value)" class="btn btn-warning">
+    Search
+  </button>
+  <!-- <a href="/car-list/{{loc.value}}/{{dateFrom.value}}/{{dateTo.value}}" class="btn btn-warning">Search</a>     -->
 </form>
