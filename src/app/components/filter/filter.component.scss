@@ -1,0 +1,49 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.logo {
+  width: 100%;
+  background: black;
+}
+
+.filter {
+  display: grid;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 2%;
+
+  &__header {
+      font-size: 21px;
+  }
+
+  .filter-type {
+    background: #F9F9F9;
+  }
+  
+  h6 {
+    font-size: 16px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    gap: 20px;
+  }
+
+}
+
+.filter > div {
+  padding: 6px;
+}
+.row-border{
+  border-top: 1px solid gray;
+  width: 100%;
+  grid-column: 1 / 2; /* this code makes the row stretch to entire width of the container */
+}

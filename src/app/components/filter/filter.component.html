@@ -1,3 +1,25 @@
-<p>
-  filter works!
-</p>
+<div class="filter-container">
+  <img class='logo' src="../../../assets/logo.png" alt="">
+  <div class="filter">
+    <div class="filter__header">Filters</div>
+    <span class="row-border"></span>
+    <div class="filter-type">
+      <h6 class="filter-type__header">VEHICLE TYPE</h6>
+      <ul>
+        <li *ngFor="let item of types">
+          <input type="checkbox" [(ngModel)]="item.checked">{{item.title}}
+        </li>
+      </ul>
+    </div>
+    <span class="row-border"></span>
+
+    <div class="filter-type">
+      <h6 class="filter-type__header">NUMBER OF PASSENGERS</h6>
+      <ul>
+        <li *ngFor="let item of numberOfPassengers">
+          <input type="checkbox" [(ngModel)]="item.checked">{{item.title}}
+        </li>
+      </ul>      
+    </div>
+  </div>
+</div>
