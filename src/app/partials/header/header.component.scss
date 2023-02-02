@@ -1,4 +1,12 @@
 @use '../../../sass/abstracts/mixins' as m;
+.navbar {
+  background: #2070CC;
+
+  a {
+    color: white;
+  }
+}
+
 .header-container {
     display: flex;
     flex-wrap: inherit;
