@@ -44,7 +44,7 @@ export class SearchBarComponent implements OnInit {
       this.isdt = false;
       return;
     } else {
-      this.router.navigateByUrl('/car-list/'+ this.location+'/'+df+'/'+dt);
+      this.router.navigateByUrl('/car-search-list/'+ this.location+'/'+df+'/'+dt);
     }    
   }
   ngOnInit(): void {
