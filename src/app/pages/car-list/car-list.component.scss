@@ -1,0 +1,18 @@
+.car-list-container {
+  padding: 2%;
+}
+
+.car-list-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4%;
+
+  .car-list-add {
+    border: none;
+    border-radius: 8px;
+    background: #2070CC;
+    color: white;
+    width: 12%;
+  }
+}
