@@ -1,7 +1,7 @@
 import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { UserService } from './services/user.service';
 import { UserApiService } from './services/user-api.service';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +31,9 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FilterComponent } from './components/filter/filter.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CarListComponent } from './pages/car-list/car-list.component';
+import { ModalService } from './services/modal.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { FilterComponent } from './components/filter/filter.component';
     InventoryComponent,
     ReservationsComponent,
     FilterComponent,
+    CarListComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,14 +73,16 @@ import { FilterComponent } from './components/filter/filter.component';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
-    
+    NgxPaginationModule,
   ],
   providers: [
     UserApiService,
     UserService,
     TestService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ModalService
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

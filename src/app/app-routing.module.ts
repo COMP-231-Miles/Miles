@@ -1,3 +1,4 @@
+import { CarListComponent } from './pages/car-list/car-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { NgModule } from '@angular/core';
@@ -15,11 +16,12 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, data: {title: 'Home'}},
-  {path: 'car-list/:location/:dateFrom/:dateTo', component: CarSearchListComponent, data: {title: 'Cars'}},
+  {path: 'car-search-list/:location/:dateFrom/:dateTo', component: CarSearchListComponent, data: {title: 'Cars'}},
   {path: 'book/:car/:location/:dateFrom/:dateTo', component: BookComponent, data: {title: 'Booking'}},
   {path: 'invoice/:car/:location/:dateFrom/:dateTo/:reservation', component: InvoiceComponent, data: {title: 'Cars'}},
   {path: 'policies', component: PoliciesComponent, data: {title: 'Cars'}},
   {path: 'contact-us', component: ContactUsComponent, data: {title: 'Contact Us'}},
+  {path: 'car-list', component: CarListComponent, data: {title: 'Car List'}},
   {path: 'sign-up', component: SignUpComponent, data: {title: 'Cars'}},
   {path: 'reservations', component: ReservationsComponent, data: {title: 'Reservations'}},
   {path: 'inventory', component: InventoryComponent, data: {title: 'Inventory'}},
