@@ -5,11 +5,11 @@ import { CarService } from 'src/app/services/car.service';
 import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
-  selector: 'app-car-list',
-  templateUrl: './car-list.component.html',
-  styleUrls: ['./car-list.component.scss']
+  selector: 'app-car-search-list',
+  templateUrl: './car-search-list.component.html',
+  styleUrls: ['./car-search-list.component.scss']
 })
-export class CarListComponent implements OnInit {
+export class CarSearchListComponent implements OnInit {
 
   dateFromToCheck: any;
   dateToToCheck: any;

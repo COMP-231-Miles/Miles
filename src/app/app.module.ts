@@ -13,7 +13,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FooterComponent } from './partials/footer/footer.component';
-import { CarListComponent } from './pages/car-list/car-list.component';
+import { CarSearchListComponent } from './pages/car-search-list/car-search-list.component';
 import { CardCarComponent } from './components/card-car/card-car.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,7 +39,7 @@ import { FilterComponent } from './components/filter/filter.component';
     HeaderComponent,
     SearchBarComponent,
     FooterComponent,
-    CarListComponent,
+    CarSearchListComponent,
     CardCarComponent,
     CardCarComponent,
     PoliciesComponent,
