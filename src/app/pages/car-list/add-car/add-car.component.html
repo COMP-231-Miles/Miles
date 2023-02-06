@@ -1,3 +1,111 @@
-<p>
-  add-car works!
-</p>
+<div class="add-car-container">
+  <h1>Add your car</h1>
+  <div>
+    <form class="add-car-form" [formGroup]="addCarForm" (ngSubmit)="submit()">
+      <!--Model name-->
+      <div class="form-group">
+        <label for="name">Model Name: </label>
+        <input
+          formControlName="name"
+          id="name"
+          type="text"
+          class="form-control" />
+      </div>
+      <!--Model name error-->
+      <div
+        *ngIf="f.name.touched && f.name.invalid"
+        class="alert alert-danger add-car-form__error">
+        <div *ngIf="f.name.errors?.required">Name is required.</div>
+        <div *ngIf="f.name.errors?.minlength">Name should be at least 3 character.</div>
+      </div>
+      <!--Model type-->
+        <div class="form-group">
+          <label for="name">Type: </label>
+          <select
+            class="form-control"
+            (change)="changeType($event)"
+            formControlName="type">
+            <option value="">Vehicle Type</option>
+            <option *ngFor="let item of CAR_TYPE" [ngValue]="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+        <div
+        *ngIf="f.type.touched && f.type.invalid"
+        class="alert alert-danger add-car-form__error">
+        <div *ngIf="f.type.errors?.required">Type is required.</div>
+      </div>
+      <!--Model name-->
+      <div class="form-group">
+        <label for="pickupLoc">Pick-up Location: </label>
+        <input
+          formControlName="pickupLoc"
+          id="name"
+          type="text"
+          class="form-control" />
+      </div>
+      <!--pickup location error-->
+      <div
+        *ngIf="f.pickupLoc.touched && f.pickupLoc.invalid"
+        class="alert alert-danger add-car-form__error">
+        <div *ngIf="f.pickupLoc.errors?.required">Pick-up Location is required.</div>
+        <div *ngIf="f.pickupLoc.errors?.minlength">Pick-up Location should be at least 10 character.</div>
+      </div>
+      <div class="multi-rows">
+        <!--Passenger-->
+        <div class="form-group-column">
+          <label for="passengers">Passengers: </label>
+          <input
+            formControlName="passengers"
+            id="passengers"
+            type="number"
+            class="form-control" />
+            <div
+            *ngIf="f.passengers.touched && f.passengers.invalid"
+            class="alert alert-danger form-group-column__error">
+            <div *ngIf="f.passengers.errors?.required">Passenger number is required.</div>
+            <div *ngIf="f.passengers.errors?.min">Passenger should be at least 2.</div>
+            <div *ngIf="f.passengers.errors?.min">Passenger should be number.</div>
+
+          </div>
+        </div>
+        <!--Price-->
+        <div class="form-group-column">
+          <label for="price">Price: </label>
+          <input
+            formControlName="price"
+            id="price"
+            type="number"
+            class="form-control" />
+            <div
+            *ngIf="f.price.touched && f.price.invalid"
+            class="alert alert-danger form-group-column__error">
+            <div *ngIf="f.price.errors?.required">Price is required.</div>
+            <div *ngIf="f.price.errors?.min">Price should be over $0.</div>
+          </div>
+        </div>
+
+      </div>
+      <!--Image upload -->
+      <div class="form-group">
+        <label for="file">File</label>
+        <input
+          formControlName="image"
+          accept="image/png, image/gif, image/jpeg"
+          id="file"
+          type="file"
+          class="form-control"
+          (change)="onFileChange($event)" />
+      </div>
+      <div
+        *ngIf="f.image.touched && f.image.invalid"
+        class="alert alert-danger add-car-form__error">
+        <div *ngIf="f.image.errors?.required">File is required.</div>
+      </div>
+      <button class="btn btn-primary add-car-form__submit" type="submit">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
