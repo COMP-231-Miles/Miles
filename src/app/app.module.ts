@@ -1,3 +1,4 @@
+import { AddCarComponent } from './pages/car-list/add-car/add-car.component';
 import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { UserService } from './services/user.service';
 import { UserApiService } from './services/user-api.service';
@@ -34,6 +35,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CarListComponent } from './pages/car-list/car-list.component';
 import { ModalService } from './services/modal.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,8 +60,10 @@ import { ModalService } from './services/modal.service';
     ReservationsComponent,
     FilterComponent,
     CarListComponent,
+    AddCarComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -67,7 +71,6 @@ import { ModalService } from './services/modal.service';
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     GoogleMapsModule,
     FontAwesomeModule,
     ToastrModule.forRoot({

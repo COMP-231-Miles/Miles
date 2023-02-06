@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-list',
   templateUrl: './car-list.component.html',
-  styleUrls: ['./car-list.component.scss']
+  styleUrls: ['./car-list.component.scss'],
 })
 export class CarListComponent implements OnInit {
   collection: any[] = [];
   page = 1;
-  
-  constructor() { }
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     for (let i = 1; i <= 100; i++) {
@@ -21,4 +22,7 @@ export class CarListComponent implements OnInit {
     this.page = event;
   }
 
+  goToAdd() {
+    this.router.navigate(['/car-list/add'], { relativeTo: this.route });
+  }
 }
