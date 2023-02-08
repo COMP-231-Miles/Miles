@@ -1,26 +1,18 @@
 .car-list-container {
-  display: grid;
-  grid-template-columns: 20% 80%;
-  margin-top: 4%;
+  padding: 2%;
 }
 
-.car-list {
-  width: 100%;
+.car-list-header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 30px;
-}
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4%;
 
-
-#searchBar, label {
-  color: black !important;
-} 
-
-.cars-space {
-  gap: 20px;
-  app-card-car {
-    margin: 10px;
+  .car-list-add {
+    border: none;
+    border-radius: 8px;
+    background: #2070CC;
+    color: white;
+    width: 12%;
   }
 }

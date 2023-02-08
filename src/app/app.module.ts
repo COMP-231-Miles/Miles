@@ -1,7 +1,8 @@
+import { AddCarComponent } from './pages/car-list/add-car/add-car.component';
 import { MyReservationComponent } from './pages/my-reservation/my-reservation.component';
 import { UserService } from './services/user.service';
 import { UserApiService } from './services/user-api.service';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './partials/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FooterComponent } from './partials/footer/footer.component';
-import { CarListComponent } from './pages/car-list/car-list.component';
+import { CarSearchListComponent } from './pages/car-search-list/car-search-list.component';
 import { CardCarComponent } from './components/card-car/card-car.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +32,10 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FilterComponent } from './components/filter/filter.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CarListComponent } from './pages/car-list/car-list.component';
+import { ModalService } from './services/modal.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,7 @@ import { FilterComponent } from './components/filter/filter.component';
     HeaderComponent,
     SearchBarComponent,
     FooterComponent,
-    CarListComponent,
+    CarSearchListComponent,
     CardCarComponent,
     CardCarComponent,
     PoliciesComponent,
@@ -54,8 +59,11 @@ import { FilterComponent } from './components/filter/filter.component';
     InventoryComponent,
     ReservationsComponent,
     FilterComponent,
+    CarListComponent,
+    AddCarComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -63,20 +71,21 @@ import { FilterComponent } from './components/filter/filter.component';
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     GoogleMapsModule,
     FontAwesomeModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
-    
+    NgxPaginationModule,
   ],
   providers: [
     UserApiService,
     UserService,
     TestService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ModalService
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

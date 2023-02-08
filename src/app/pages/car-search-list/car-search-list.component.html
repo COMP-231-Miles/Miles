@@ -1,0 +1,14 @@
+<div class="car-list-container">
+  <app-filter></app-filter>
+  <section class="car-list">
+    <h2 class="exo">Available Cars in {{locationToCheck}}</h2>
+      <div class="cars-space" *ngIf="areCars">
+        <app-card-car *ngFor="let car of availableCars" [data]="car" [dateFrom]="dateFromToCheck" [dateTo]="dateToToCheck" [isInventory]="false"></app-card-car>
+      </div>  
+  
+      <div *ngIf="!areCars">
+        <h5 class="exo">We are sorry! There are not available cars for that Location or Dates.</h5>
+      </div>
+  </section>
+</div>
+

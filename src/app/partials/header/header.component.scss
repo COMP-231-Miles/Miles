@@ -1,4 +1,12 @@
 @use '../../../sass/abstracts/mixins' as m;
+.navbar {
+  background: #2070CC;
+
+  a {
+    color: white;
+  }
+}
+
 .header-container {
     display: flex;
     flex-wrap: inherit;
@@ -22,6 +30,7 @@
   right: 2em;
 }
 
+
 .login-form {
   display: flex;
   float: right;
@@ -41,4 +50,10 @@
 
 .dropdown-menu.show {
   inset: 100% auto auto -52% !important;
+  background: #2070CC !important;
+
+  .dropdown-item:focus, .dropdown-item:hover {
+    font-weight: bold;
+    background-color: #2070CC !important;
+}
 }
