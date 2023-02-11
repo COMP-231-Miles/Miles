@@ -148,11 +148,18 @@ router.post('/:id', async (req, res, next) => {
     isAvailable: req.body.isAvailable,
   };
 
+  console.log('In the update car');
+  console.log(updateCar);
+  console.log({ _id: req.params.id });
   //mongoose model name
-  Car.findOneAndUpdate({ _id: req.params.id }, updateCar).then(result => {
-    res.status(201).json({
-      message: 'Car updated successfully',
-    });
+  const updatedCar = await Car.findOneAndUpdate(
+    { _id: req.params.id },
+    updateCar
+  );
+  console.log(updatedCar);
+  return res.status(201).json({
+    message: 'Car updated successfully',
+    car: await Car.findOne({ _id: req.params.id }),
   });
 });
 
@@ -165,11 +172,7 @@ const checkAndReturUser = async req => {
     });
   }
 
-  console.log('Email');
-  console.log(req.user);
   const user = await User.findOne({ email: req.user });
-  console.log('user');
-  console.log(user);
 
   if (!user) {
     return res.status(403).json({

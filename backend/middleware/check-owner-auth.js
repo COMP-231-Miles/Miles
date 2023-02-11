@@ -14,7 +14,6 @@ const verifyOwnerJWT = (req, res, next) => {
         res.status(401).json({ message: 'Expired Token' });
       res.status(401).json({ message: 'UnAuthorized' });
     } else {
-      console.log(decoded);
       if (decoded.userType != 'OWNER') {
         res.status(401).json({ message: 'UnAuthorized! Not a Owner User' });
       } else {
