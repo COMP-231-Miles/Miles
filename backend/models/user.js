@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
+const Schema = mongoose.Schema;
 
 const AddressSchema = mongoose.Schema({
-  city:  { type: String },
-  street:  { type: String },
-  country:  { type: String },
+  city: { type: String },
+  street: { type: String },
+  country: { type: String },
 });
 
 const DriverLicenseSchema = mongoose.Schema({
-  number:  { type: String, required: true },
-  countryIssued:  { type: String, required: true },
-  dateIssued:  { type: String, required: true },
+  number: { type: String, required: true },
+  countryIssued: { type: String, required: true },
+  dateIssued: { type: String, required: true },
 });
 
 const userSchema = mongoose.Schema({
@@ -27,6 +28,12 @@ const userSchema = mongoose.Schema({
     type: DriverLicenseSchema,
   },
   phone: { type: Number, required: true },
+  cars: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Car',
+    },
+  ],
 });
 
 userSchema.plugin(uniqueValidator);
