@@ -34,21 +34,18 @@ router.get('/owner', async (req, res, next) => {
 // Add a new car
 router.post('', async (req, res, next) => {
   // Add some car add validation
-  console.log('add car is callllllllllllllllllllled');
   const user = req.user;
-  // const user = await checkAndReturUser(req);
-  console.log('useruseruser', user);
   let errors = [];
-  if (!req.name) {
+  if (!req.body.name) {
     errors.push('Car name is required!');
   }
-  if (!req.type) {
+  if (!req.body.type) {
     errors.push('Car type is required!');
   }
-  if (!req.passengers) {
+  if (!req.body.passengers) {
     errors.push('Car passengers seat number is required!');
   }
-  if (!req.price) {
+  if (!req.body.price) {
     errors.push('Car Price Per day is required!');
   }
 
@@ -73,7 +70,6 @@ router.post('', async (req, res, next) => {
     isAvailable: req.body.isAvailable,
     user: user._id,
   });
-  console.log('added car model is being called,', carToAdd.name)
   carToAdd.save().then(result => {
     res.status(201).json({
       message: 'Car added successfully',
