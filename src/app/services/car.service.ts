@@ -1,13 +1,22 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { map } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
+  private token: any;
+  private user: any;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private userService: UserService,
+    ) { 
+      this.token = localStorage.getItem('token');
+
+    }
   //add user type
   cars: any = [];
   getCars(): void {
@@ -47,12 +56,11 @@ export class CarService {
     return this.httpClient.get<any>('http://localhost:3000/api/car/delete/'+id);
   }
 
-  addCar(body: FormData): Observable<any> {
-    return this.httpClient.post<any>('http://localhost:3000/api/car', body)
-    .pipe(
-      catchError((err: HttpErrorResponse) => {
-        return throwError(() => err.error);
-      })
-    );
+  addCar(body: any) {
+    console.log('this.token2', this.token);
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.token )
+    console.log(headers);
+    return this.httpClient.post<any>('http://localhost:3000/api/car', body, { headers: headers }).subscribe();
   }
 }

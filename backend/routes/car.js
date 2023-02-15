@@ -34,18 +34,21 @@ router.get('/owner', async (req, res, next) => {
 // Add a new car
 router.post('', async (req, res, next) => {
   // Add some car add validation
-  const user = await checkAndReturUser(req);
+  console.log('add car is callllllllllllllllllllled');
+  const user = req.user;
+  // const user = await checkAndReturUser(req);
+  console.log('useruseruser', user);
   let errors = [];
-  if (!req.body.name) {
+  if (!req.name) {
     errors.push('Car name is required!');
   }
-  if (!req.body.type) {
+  if (!req.type) {
     errors.push('Car type is required!');
   }
-  if (!req.body.passengers) {
+  if (!req.passengers) {
     errors.push('Car passengers seat number is required!');
   }
-  if (!req.body.price) {
+  if (!req.price) {
     errors.push('Car Price Per day is required!');
   }
 
@@ -70,6 +73,7 @@ router.post('', async (req, res, next) => {
     isAvailable: req.body.isAvailable,
     user: user._id,
   });
+  console.log('added car model is being called,', carToAdd.name)
   carToAdd.save().then(result => {
     res.status(201).json({
       message: 'Car added successfully',
@@ -165,16 +169,21 @@ router.post('/:id', async (req, res, next) => {
 
 const checkAndReturUser = async req => {
   //Validation
-  if (!req.user || req.user == null) {
+  console.log('checkAndReturUser');
+
+  if (!req.body.user || req.body.user == null) {
+    console.log('checkAndReturUser1');
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },
     });
   }
 
-  const user = await User.findOne({ email: req.user });
-
+  const user = await User.findOne({ email: req.body.user });
+  console.log('user11', user);
   if (!user) {
+    console.log('checkAndReturUser2');
+
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },

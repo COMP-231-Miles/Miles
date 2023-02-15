@@ -25,12 +25,16 @@ export class UserService {
       take(1),
       tap(res => {
         if (res && res.token) {
-          this.token = res.token;
+          localStorage.setItem('token', JSON.stringify(res.token));
           localStorage.setItem('user', JSON.stringify(res.user));
           this.currentUserSource.next(res.user);
         }
       })
     );
+  }
+
+  getToken() {
+    return this.token;
   }
 
   logout(): void {

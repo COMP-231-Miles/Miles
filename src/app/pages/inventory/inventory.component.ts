@@ -55,11 +55,11 @@ export class InventoryComponent implements OnInit {
     carData.append('insurance', data.insurance); 
     carData.append('imageName', data.image);     
 
-    this.carService.addCar(carData).subscribe({
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    });
+    // this.carService.addCar(carData).subscribe({
+    //   error: error => {
+    //     console.error('There was an error!', error);
+    //   }
+    // });
     console.warn(data);
     alert('Your request has been successfully submitted.');
     location.reload();
