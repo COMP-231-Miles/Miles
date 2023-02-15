@@ -1,5 +1,6 @@
 //app.js will hold the express app
 const express = require('express');
+let cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -11,6 +12,14 @@ const policyRoutes = require('./routes/policy');
 const verifyOwnerJWT = require('./middleware/check-owner-auth');
 
 const app = express();
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
 mongoose
   .connect(
     'mongodb+srv://milesAdmin:7VN6saOdG72gNTlA@cluster0.d0ejdlc.mongodb.net/node-miles?retryWrites=true&w=majority'
