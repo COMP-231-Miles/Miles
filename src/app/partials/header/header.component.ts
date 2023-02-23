@@ -48,11 +48,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     this.userService.login(payload).pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe({
-      error: (err) => {
-        this.toastr.error(err.message);
-      }
-    });
+    .subscribe(user => {
+    }, error => {
+      console.log(error);
+      this.toastr.error(error.error);
+    })
   }
 
   logout(): void {

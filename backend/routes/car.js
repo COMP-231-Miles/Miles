@@ -34,7 +34,7 @@ router.get('/owner', async (req, res, next) => {
 // Add a new car
 router.post('', async (req, res, next) => {
   // Add some car add validation
-  const user = await checkAndReturUser(req);
+  const user = req.user;
   let errors = [];
   if (!req.body.name) {
     errors.push('Car name is required!');
@@ -165,16 +165,21 @@ router.post('/:id', async (req, res, next) => {
 
 const checkAndReturUser = async req => {
   //Validation
-  if (!req.user || req.user == null) {
+  console.log('checkAndReturUser');
+
+  if (!req.body.user || req.body.user == null) {
+    console.log('checkAndReturUser1');
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },
     });
   }
 
-  const user = await User.findOne({ email: req.user });
-
+  const user = await User.findOne({ email: req.body.user });
+  console.log('user11', user);
   if (!user) {
+    console.log('checkAndReturUser2');
+
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },

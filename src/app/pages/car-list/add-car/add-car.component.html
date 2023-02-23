@@ -26,7 +26,7 @@
             (change)="changeType($event)"
             formControlName="type">
             <option value="">Vehicle Type</option>
-            <option *ngFor="let item of CAR_TYPE" [ngValue]="item">
+            <option *ngFor="let item of CAR_TYPE" [value]="item">
               {{ item }}
             </option>
           </select>
@@ -53,6 +53,38 @@
         <div *ngIf="f.pickupLoc.errors?.minlength">Pick-up Location should be at least 10 character.</div>
       </div>
       <div class="multi-rows">
+        <div class="form-group-column">
+          <label for="gear">Gear: </label>
+          <select
+            class="form-control"
+            (change)="changeGear($event)"
+            formControlName="gear">
+            <option value="">Gear Type</option>
+            <option *ngFor="let item of GEAR_TYPE" [value]="item">
+              {{ item }}
+            </option>
+          </select>
+            <div
+            *ngIf="f.gear.touched && f.gear.invalid"
+            class="alert alert-danger form-group-column__error">
+            <div *ngIf="f.gear.errors?.required">Gear must be selected.</div>
+          </div>
+        </div>
+        <div class="form-group-column">
+          <label for="insurance">Insurance: </label>
+          <input
+            formControlName="insurance"
+            id="insurance"
+            type="text"
+            class="form-control" />
+            <!-- <div
+            *ngIf="f.insurance.touched && f.gear.invalid"
+            class="alert alert-danger form-group-column__error">
+            <div *ngIf="f.gear.errors?.required">Gear must be selected.</div>
+          </div> -->
+        </div>
+      </div>
+      <div class="multi-rows">
         <!--Passenger-->
         <div class="form-group-column">
           <label for="passengers">Passengers: </label>
@@ -60,6 +92,7 @@
             formControlName="passengers"
             id="passengers"
             type="number"
+            min="0"
             class="form-control" />
             <div
             *ngIf="f.passengers.touched && f.passengers.invalid"
@@ -77,6 +110,7 @@
             formControlName="price"
             id="price"
             type="number"
+            min="0"
             class="form-control" />
             <div
             *ngIf="f.price.touched && f.price.invalid"
