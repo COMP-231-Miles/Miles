@@ -18,7 +18,8 @@ router.get('', (req, res, next) => {
 });
 
 router.get('/owner', async (req, res, next) => {
-  const user = await checkAndReturUser(req);
+  // const user = await checkAndReturUser(req);
+  const user = req.user;
   //mongoose model name
   Car.find({
     user: user._id,

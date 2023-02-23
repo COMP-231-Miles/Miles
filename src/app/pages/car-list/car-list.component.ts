@@ -1,5 +1,7 @@
+import { CarService } from 'src/app/services/car.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-car-list',
@@ -9,10 +11,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CarListComponent implements OnInit {
   collection: any[] = [];
   page = 1;
+  carList: any= [];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private carService: CarService
+  ) {}
 
   ngOnInit() {
+    this.carService
+      .getOwnersCars()
+      .pipe(take(1))
+      .subscribe(res => {
+        //weird..
+        const cars = JSON.parse(JSON.stringify(res));
+        this.carList = cars.data;
+        console.log(this.carList)
+      });
     for (let i = 1; i <= 100; i++) {
       this.collection.push(`item ${i}`);
     }

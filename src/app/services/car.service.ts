@@ -57,10 +57,14 @@ export class CarService {
   }
 
   addCar(body: any) {
-    console.log('this.token2', this.token);
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Bearer ' + this.token )
-    console.log(headers);
     return this.httpClient.post<any>('http://localhost:3000/api/car', body, { headers: headers }).subscribe();
+  }
+
+  getOwnersCars() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.token )
+    return this.httpClient.get<any>('http://localhost:3000/api/car/owner', { headers: headers });
   }
 }
