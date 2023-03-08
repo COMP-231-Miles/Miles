@@ -2,6 +2,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CarService } from 'src/app/services/car.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-car',
@@ -25,7 +26,10 @@ export class AddCarComponent implements OnInit {
     imageSource: new FormControl('', [Validators.required])
   });
 
-  constructor(private carService: CarService, private userService: UserService) { }
+  constructor(
+    private carService: CarService, 
+    private route: ActivatedRoute,
+    private router: Router ) { }
 
   ngOnInit() { }
 
@@ -57,10 +61,14 @@ export class AddCarComponent implements OnInit {
 
     if(!this.addCarForm.invalid) {
       const formData = new FormData();
-      if(this.image) formData.append('image', this.addCarForm.get('imageSource')!.value!);
+      if (this.image) formData.append('image', this.addCarForm.get('imageSource')!.value!);
       this.car = this.addCarForm.value;
       const payload = { ...this.car, user: parsedUser }
       this.carService.addCar(payload);
     }
+    setTimeout(() => {
+      this.router.navigate(['/car-list']);
+    });
   }
+
 }
