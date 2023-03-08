@@ -44,5 +44,6 @@ export class CarListComponent implements OnInit {
 
   deleteCar(id: string) {
     this.carList = this.carList.filter((car: any) => car._id !== id);
+    this.carService.deleteCarById(id).pipe(take(1)).subscribe();
   }
 }

@@ -53,7 +53,9 @@ export class CarService {
   }
 
   deleteCarById(id: string) {
-    return this.httpClient.get<any>('http://localhost:3000/api/car/delete/'+id);
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.token )
+    return this.httpClient.delete<any>(`http://localhost:3000/api/car/delete/${id}`, { headers: headers });
   }
 
   addCar(body: any) {

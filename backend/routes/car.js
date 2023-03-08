@@ -1,4 +1,4 @@
-const express = require('express');
+  const express = require('express');
 const { async } = require('rxjs');
 const router = express.Router();
 const Car = require('../models/car');
@@ -8,6 +8,7 @@ const User = require('../models/user');
 
 router.get('', (req, res, next) => {
   //mongoose model name
+  console.log('called');
   Car.find() // return all result.
     .then(documents => {
       res.status(200).json({
@@ -81,9 +82,9 @@ router.post('', async (req, res, next) => {
 });
 
 // Delete car by ID
-router.get('/delete/:id', async (req, res, next) => {
+router.delete('/delete/:id', async (req, res, next) => {
   //mongoose model name
-  const user = await checkAndReturUser(req);
+  // const user = await checkAndReturUser(req);
 
   const car = await Car.findOne({ _id: req.params.id });
   if (!car) {
@@ -92,15 +93,15 @@ router.get('/delete/:id', async (req, res, next) => {
       data: { errors: 'Invalid Car Id' },
     });
   }
-  const carOfUser = await Car.findOne({ _id: req.params.id, user: user._id });
-  if (!carOfUser) {
-    res.status(401).json({
-      message: 'UnAuthorized',
-      data: { errors: 'User doesnot have access to delete this car' },
-    });
-  }
+  // const carOfUser = await Car.findOne({ _id: req.params.id });
+  // if (!carOfUser) {
+  //   res.status(401).json({
+  //     message: 'UnAuthorized', 
+  //     data: { errors: 'User doesnot have access to delete this car' },
+  //   });
+  // }
   Car.deleteOne({ _id: req.params.id }).then(result => {
-    res.status(201).json({
+    res.status(200).json({
       message: 'Car deleted successfully',
     });
   });
