@@ -1,7 +1,7 @@
 import { CarService } from 'src/app/services/car.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { take, filter } from 'rxjs';
 
 @Component({
   selector: 'app-car-list',
@@ -40,5 +40,9 @@ export class CarListComponent implements OnInit {
 
   goToAdd() {
     this.router.navigate(['/car-list/add'], { relativeTo: this.route });
+  }
+
+  deleteCar(id: string) {
+    this.carList = this.carList.filter((car: any) => car._id !== id);
   }
 }
