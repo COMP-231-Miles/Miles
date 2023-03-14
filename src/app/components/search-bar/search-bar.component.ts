@@ -14,7 +14,7 @@ export class SearchBarComponent implements OnInit {
   @Input() placeholder: String = 'Search';
 
   constructor(private router: Router) { }
-  locations = ['Brampton'];
+  locations = ['Toronto'];
   date = new Date;
   isloc: boolean = true;
   isdf: boolean = true;

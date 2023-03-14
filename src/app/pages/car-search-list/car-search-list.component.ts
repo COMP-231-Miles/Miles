@@ -30,7 +30,7 @@ export class CarSearchListComponent implements OnInit {
 
   getCars() {
     this.carService.getCars2().subscribe(res => {
-      this.carList = res.data.filter((x: any) => x.pickupLoc == this.locationToCheck);
+      this.carList = res.data.filter((car: any) => car.isAvailable);
       //filter reservations by location
       console.log('cars: ');
       console.log(this.carList);
