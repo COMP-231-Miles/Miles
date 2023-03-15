@@ -11,8 +11,7 @@ const carSchema = new Schema({
   isAuto: Boolean,
   ACsup: Boolean,
   pickupLoc: String,
-  insurance: Number,
-  imageName: String,
+  image: String,
   isAvailable: Boolean,
   user: {
     type: Schema.Types.ObjectId,

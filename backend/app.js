@@ -1,4 +1,5 @@
 //app.js will hold the express app
+const path = require("path");
 const express = require('express');
 let cors = require('cors');
 const bodyParser = require('body-parser');
@@ -19,6 +20,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use("/images", express.static(path.join("backend/images")));
 
 mongoose
   .connect(

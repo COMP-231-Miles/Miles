@@ -3,38 +3,39 @@ const { async } = require('rxjs');
 const router = express.Router();
 const Car = require('../models/car');
 const User = require('../models/user');
+const multer = require("multer");
 
-// Get all cars
+const MIME_TYPE_MAP = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/jpg": "jpg"
+};
 
-router.get('', (req, res, next) => {
-  //mongoose model name
-  Car.find() // return all result.
-    .then(documents => {
-      res.status(200).json({
-        message: 'fetched successfully',
-        data: documents,
-      });
-    });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error("Invalid mime type");
+    if (isValid) {
+      error = null;
+    }
+    cb(error, "backend/images");
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname
+      .toLowerCase()
+      .split(" ")
+      .join("-");
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + "-" + Date.now() + "." + ext);
+  }
 });
 
-router.get('/owner', async (req, res, next) => {
-  const user = await checkAndReturUser(req);
-  //mongoose model name
-  Car.find({
-    user: user._id,
-  }) // return all result.
-    .then(documents => {
-      res.status(200).json({
-        message: 'fetched successfully',
-        data: documents,
-      });
-    });
-});
-
-// Add a new car
-router.post('', async (req, res, next) => {
+//Add a car
+router.post('', multer({ storage: storage }).single("image"),
+async (req, res, next) => {
   // Add some car add validation
-  const user = req.user;
+  const url = req.protocol + "://" + req.get("host");
+  const user = req.body.user;
   let errors = [];
   if (!req.body.name) {
     errors.push('Car name is required!');
@@ -55,6 +56,7 @@ router.post('', async (req, res, next) => {
       data: { errors: errors },
     });
   }
+  console.log(req.body)
   //mongoose model name
   const carToAdd = new Car({
     name: req.body.name,
@@ -65,8 +67,7 @@ router.post('', async (req, res, next) => {
     isAuto: req.body.isAuto,
     ACsup: req.body.ACsup,
     pickupLoc: req.body.pickupLoc,
-    insurance: req.body.insurance,
-    imageName: req.body.imageName,
+    image: url + "/images/" + req.file.filename,
     isAvailable: req.body.isAvailable,
     user: user._id,
   });
@@ -79,10 +80,38 @@ router.post('', async (req, res, next) => {
   });
 });
 
-// Delete car by ID
-router.get('/delete/:id', async (req, res, next) => {
+// Get all cars
+
+router.get('', (req, res, next) => {
   //mongoose model name
-  const user = await checkAndReturUser(req);
+  Car.find() // return all result.
+    .then(documents => {
+      res.status(200).json({
+        message: 'fetched successfully',
+        data: documents,
+      });
+    });
+});
+
+router.get('/owner', async (req, res, next) => {
+  // const user = await checkAndReturUser(req);
+  const user = req.user;
+  //mongoose model name
+  Car.find({
+    user: user._id,
+  }) // return all result.
+    .then(documents => {
+      res.status(200).json({
+        message: 'fetched successfully',
+        data: documents,
+      });
+    });
+});
+
+// Delete car by ID
+router.delete('/delete/:id', async (req, res, next) => {
+  //mongoose model name
+  // const user = await checkAndReturUser(req);
 
   const car = await Car.findOne({ _id: req.params.id });
   if (!car) {
@@ -91,15 +120,15 @@ router.get('/delete/:id', async (req, res, next) => {
       data: { errors: 'Invalid Car Id' },
     });
   }
-  const carOfUser = await Car.findOne({ _id: req.params.id, user: user._id });
-  if (!carOfUser) {
-    res.status(401).json({
-      message: 'UnAuthorized',
-      data: { errors: 'User doesnot have access to delete this car' },
-    });
-  }
+  // const carOfUser = await Car.findOne({ _id: req.params.id });
+  // if (!carOfUser) {
+  //   res.status(401).json({
+  //     message: 'UnAuthorized', 
+  //     data: { errors: 'User doesnot have access to delete this car' },
+  //   });
+  // }
   Car.deleteOne({ _id: req.params.id }).then(result => {
-    res.status(201).json({
+    res.status(200).json({
       message: 'Car deleted successfully',
     });
   });
@@ -118,7 +147,7 @@ router.get('/:id', (req, res, next) => {
 
 // Update car by ID
 router.post('/:id', async (req, res, next) => {
-  const user = await checkAndReturUser(req);
+  // const user = await checkAndReturUser(req);
 
   const car = await Car.findOne({ _id: req.params.id });
   if (!car) {
@@ -127,13 +156,13 @@ router.post('/:id', async (req, res, next) => {
       data: { errors: 'Invalid Car Id' },
     });
   }
-  const carOfUser = await Car.findOne({ _id: req.params.id, user: user._id });
-  if (!carOfUser) {
-    res.status(401).json({
-      message: 'UnAuthorized',
-      data: { errors: 'User doesnot have access to update this car' },
-    });
-  }
+  // const carOfUser = await Car.findOne({ _id: req.params.id, user: user._id });
+  // if (!carOfUser) {
+  //   res.status(401).json({
+  //     message: 'UnAuthorized',
+  //     data: { errors: 'User doesnot have access to update this car' },
+  //   });
+  // }
   const updateCar = {
     name: req.body.name,
     type: req.body.type,
@@ -143,20 +172,15 @@ router.post('/:id', async (req, res, next) => {
     isAuto: req.body.isAuto,
     ACsup: req.body.ACsup,
     pickupLoc: req.body.pickupLoc,
-    insurance: req.body.insurance,
     imageName: req.body.imageName,
     isAvailable: req.body.isAvailable,
   };
 
-  console.log('In the update car');
-  console.log(updateCar);
-  console.log({ _id: req.params.id });
   //mongoose model name
   const updatedCar = await Car.findOneAndUpdate(
     { _id: req.params.id },
     updateCar
   );
-  console.log(updatedCar);
   return res.status(201).json({
     message: 'Car updated successfully',
     car: await Car.findOne({ _id: req.params.id }),
@@ -165,10 +189,7 @@ router.post('/:id', async (req, res, next) => {
 
 const checkAndReturUser = async req => {
   //Validation
-  console.log('checkAndReturUser');
-
   if (!req.body.user || req.body.user == null) {
-    console.log('checkAndReturUser1');
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },
@@ -176,10 +197,7 @@ const checkAndReturUser = async req => {
   }
 
   const user = await User.findOne({ email: req.body.user });
-  console.log('user11', user);
   if (!user) {
-    console.log('checkAndReturUser2');
-
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },

@@ -1,7 +1,7 @@
-<div class="add-car-container">
+<div *ngIf="car" class="add-car-container">
   <h1>Add your car</h1>
   <div>
-    <form class="add-car-form" [formGroup]="addCarForm" (ngSubmit)="submit()">
+    <form class="add-car-form" [formGroup]="editCarForm" (ngSubmit)="submit()">
       <!--Model name-->
       <div class="form-group">
         <label for="name">Model Name: </label>
@@ -107,22 +107,6 @@
           </div>
         </div>
 
-      </div>
-      <!--Image upload -->
-      <div class="form-group">
-        <label for="file">File</label>
-        <input
-          formControlName="image"
-          accept="image/png, image/gif, image/jpeg"
-          id="file"
-          type="file"
-          class="form-control"
-          (change)="onFileChange($event)" />
-      </div>
-      <div
-        *ngIf="f.image.touched && f.image.invalid"
-        class="alert alert-danger add-car-form__error">
-        <div *ngIf="f.image.errors?.required">File is required.</div>
       </div>
       <button class="btn btn-primary add-car-form__submit" type="submit">
         Submit

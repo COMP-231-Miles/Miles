@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, take, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user.interface';
 import { LoginPayload, UserService } from './../../services/user.service';
 
@@ -17,6 +17,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentUser$: Observable<User | null>;
   ngUnsubscribe = new Subject<void>();
 
+  userTypeSubject = new BehaviorSubject<boolean>(false);
+  userType$ = this.userTypeSubject.asObservable()
+
   user: any = [];
 
   constructor(
@@ -28,7 +31,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser$ = this.userService.currentUserSource$;
-    this.user = this.currentUser$;
+    this.currentUser$.pipe(take(1)).subscribe((user) => {
+      this.user = user;
+      console.log(this.user)
+      if (this.user?.userType === 'OWNER') {
+        this.userTypeSubject.next(true);
+      }
+    });
   }
 
   ngOnDestroy(): void {

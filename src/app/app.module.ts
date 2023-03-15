@@ -36,6 +36,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CarListComponent } from './pages/car-list/car-list.component';
 import { ModalService } from './services/modal.service';
 import { CommonModule } from '@angular/common';
+import { EditCarComponent } from './pages/car-list/edit-car/edit-car.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,8 @@ import { CommonModule } from '@angular/common';
     FilterComponent,
     CarListComponent,
     AddCarComponent,
+    CarListComponent,
+    EditCarComponent
   ],
   imports: [
     CommonModule,

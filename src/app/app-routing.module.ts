@@ -1,3 +1,4 @@
+import { EditCarComponent } from './pages/car-list/edit-car/edit-car.component';
 import { AddCarComponent } from './pages/car-list/add-car/add-car.component';
 import { CarListComponent } from './pages/car-list/car-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'contact-us', component: ContactUsComponent, data: {title: 'Contact Us'}},
   {path: 'car-list', component: CarListComponent, data: {title: 'Car List'}},
   {path: 'car-list/add', component: AddCarComponent, data: {title: 'Add Car'}},
+  {path: 'car-list/edit', component: EditCarComponent, data: {title: 'Edit Car'}},
   {path: 'sign-up', component: SignUpComponent, data: {title: 'Cars'}},
   {path: 'reservations', component: ReservationsComponent, data: {title: 'Reservations'}},
   {path: 'inventory', component: InventoryComponent, data: {title: 'Inventory'}},

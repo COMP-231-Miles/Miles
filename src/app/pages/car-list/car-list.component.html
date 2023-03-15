@@ -1,14 +1,34 @@
 <div class="car-list-container">
   <div class="car-list-header">
-    <h4> Available cars(4)</h4>
+    <h4> Available cars({{carList.length}})</h4>
     <button class="car-list-add" (click)="goToAdd()">Add new car</button>
   </div>
-  <router-outlet></router-outlet>
+    <table class="cars-table-large">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Type</td>
+          <td>Location</td>
+          <td>Price</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of carList | paginate: { itemsPerPage: 10, currentPage: page }">
+          <td class="td-name">{{ item.name }}</td>
+          <td class="td-type">{{ item.type }}</td>
+          <td class="td-pickupLoc">{{ item.pickupLoc }}</td>
+          <td class="td-price">{{ item.price | currency:'CAD':'code'}}</td>
+          <td class="td-edit">
+            <button type="button" (click)="editCar(item._id)" class="btn btn-outline-dark">Edit</button>
+          </td>
+          <td class="td-delete">
+            <button type="button" (click)="deleteCar(item._id)" class="btn btn-outline-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
 </div>
-<!-- <div class="list">
-		<ul>
-			<li *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: page }">{{ item }}</li>
-		</ul>
-
-		<pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
-</div> -->
+<router-outlet></router-outlet>
