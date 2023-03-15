@@ -147,7 +147,7 @@ router.get('/:id', (req, res, next) => {
 
 // Update car by ID
 router.post('/:id', async (req, res, next) => {
-  const user = await checkAndReturUser(req);
+  // const user = await checkAndReturUser(req);
 
   const car = await Car.findOne({ _id: req.params.id });
   if (!car) {
@@ -156,13 +156,13 @@ router.post('/:id', async (req, res, next) => {
       data: { errors: 'Invalid Car Id' },
     });
   }
-  const carOfUser = await Car.findOne({ _id: req.params.id, user: user._id });
-  if (!carOfUser) {
-    res.status(401).json({
-      message: 'UnAuthorized',
-      data: { errors: 'User doesnot have access to update this car' },
-    });
-  }
+  // const carOfUser = await Car.findOne({ _id: req.params.id, user: user._id });
+  // if (!carOfUser) {
+  //   res.status(401).json({
+  //     message: 'UnAuthorized',
+  //     data: { errors: 'User doesnot have access to update this car' },
+  //   });
+  // }
   const updateCar = {
     name: req.body.name,
     type: req.body.type,
@@ -172,7 +172,6 @@ router.post('/:id', async (req, res, next) => {
     isAuto: req.body.isAuto,
     ACsup: req.body.ACsup,
     pickupLoc: req.body.pickupLoc,
-    insurance: req.body.insurance,
     imageName: req.body.imageName,
     isAvailable: req.body.isAvailable,
   };

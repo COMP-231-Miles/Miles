@@ -92,7 +92,7 @@ export class AddCarComponent implements OnInit {
       this.carService.addCar(postData);
     }
     setTimeout(() => {
-      this.router.navigate(['/car-list'])        .then(() => {
+      this.router.navigate(['/car-list']).then(() => {
         window.location.reload();
       });
     });

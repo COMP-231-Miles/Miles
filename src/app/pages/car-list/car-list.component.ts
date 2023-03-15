@@ -63,6 +63,6 @@ export class CarListComponent implements OnInit, OnChanges {
   }
 
   editCar(id: string) {
-
+    this.router.navigate([`/car-list/edit`], { queryParams: { id: id}}) 
   }
 }
