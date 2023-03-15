@@ -1,14 +1,90 @@
-  const express = require('express');
+const express = require('express');
 const { async } = require('rxjs');
 const router = express.Router();
 const Car = require('../models/car');
 const User = require('../models/user');
+const multer = require("multer");
+
+const MIME_TYPE_MAP = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/jpg": "jpg"
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error("Invalid mime type");
+    if (isValid) {
+      error = null;
+    }
+    cb(error, "backend/images");
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname
+      .toLowerCase()
+      .split(" ")
+      .join("-");
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + "-" + Date.now() + "." + ext);
+  }
+});
+
+//Add a car
+router.post('', multer({ storage: storage }).single("image"),
+async (req, res, next) => {
+  // Add some car add validation
+  const url = req.protocol + "://" + req.get("host");
+  const user = req.body.user;
+  let errors = [];
+  if (!req.body.name) {
+    errors.push('Car name is required!');
+  }
+  if (!req.body.type) {
+    errors.push('Car type is required!');
+  }
+  if (!req.body.passengers) {
+    errors.push('Car passengers seat number is required!');
+  }
+  if (!req.body.price) {
+    errors.push('Car Price Per day is required!');
+  }
+
+  if (errors.length > 0) {
+    return res.status(403).json({
+      message: 'Invalid! ',
+      data: { errors: errors },
+    });
+  }
+  console.log(req.body)
+  //mongoose model name
+  const carToAdd = new Car({
+    name: req.body.name,
+    type: req.body.type,
+    passengers: req.body.passengers,
+    price: req.body.price,
+    luggage: req.body.luggage,
+    isAuto: req.body.isAuto,
+    ACsup: req.body.ACsup,
+    pickupLoc: req.body.pickupLoc,
+    insurance: req.body.insurance,
+    image: url + "/images/" + req.file.filename,
+    isAvailable: req.body.isAvailable,
+    user: user._id,
+  });
+  carToAdd.save().then(result => {
+    res.status(201).json({
+      message: 'Car added successfully',
+      postId: result._id,
+      car: result,
+    });
+  });
+});
 
 // Get all cars
 
 router.get('', (req, res, next) => {
   //mongoose model name
-  console.log('called');
   Car.find() // return all result.
     .then(documents => {
       res.status(200).json({
@@ -31,54 +107,6 @@ router.get('/owner', async (req, res, next) => {
         data: documents,
       });
     });
-});
-
-// Add a new car
-router.post('', async (req, res, next) => {
-  // Add some car add validation
-  const user = req.user;
-  let errors = [];
-  if (!req.body.name) {
-    errors.push('Car name is required!');
-  }
-  if (!req.body.type) {
-    errors.push('Car type is required!');
-  }
-  if (!req.body.passengers) {
-    errors.push('Car passengers seat number is required!');
-  }
-  if (!req.body.price) {
-    errors.push('Car Price Per day is required!');
-  }
-
-  if (errors.length > 0) {
-    return res.status(403).json({
-      message: 'Invalid! ',
-      data: { errors: errors },
-    });
-  }
-  //mongoose model name
-  const carToAdd = new Car({
-    name: req.body.name,
-    type: req.body.type,
-    passengers: req.body.passengers,
-    price: req.body.price,
-    luggage: req.body.luggage,
-    isAuto: req.body.isAuto,
-    ACsup: req.body.ACsup,
-    pickupLoc: req.body.pickupLoc,
-    insurance: req.body.insurance,
-    imageName: req.body.imageName,
-    isAvailable: req.body.isAvailable,
-    user: user._id,
-  });
-  carToAdd.save().then(result => {
-    res.status(201).json({
-      message: 'Car added successfully',
-      postId: result._id,
-      car: result,
-    });
-  });
 });
 
 // Delete car by ID
@@ -150,15 +178,11 @@ router.post('/:id', async (req, res, next) => {
     isAvailable: req.body.isAvailable,
   };
 
-  console.log('In the update car');
-  console.log(updateCar);
-  console.log({ _id: req.params.id });
   //mongoose model name
   const updatedCar = await Car.findOneAndUpdate(
     { _id: req.params.id },
     updateCar
   );
-  console.log(updatedCar);
   return res.status(201).json({
     message: 'Car updated successfully',
     car: await Car.findOne({ _id: req.params.id }),
@@ -167,10 +191,7 @@ router.post('/:id', async (req, res, next) => {
 
 const checkAndReturUser = async req => {
   //Validation
-  console.log('checkAndReturUser');
-
   if (!req.body.user || req.body.user == null) {
-    console.log('checkAndReturUser1');
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },
@@ -178,10 +199,7 @@ const checkAndReturUser = async req => {
   }
 
   const user = await User.findOne({ email: req.body.user });
-  console.log('user11', user);
   if (!user) {
-    console.log('checkAndReturUser2');
-
     return res.status(403).json({
       message: 'Invalid! ',
       data: { errors: ['Not Loggged in user'] },

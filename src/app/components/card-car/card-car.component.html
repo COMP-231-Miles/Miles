@@ -1,5 +1,5 @@
 <div class="car-card dir-row" *ngIf="!isInventory">
-  <img src="{{data.imageName}}" alt="" style="object-fit: contain;">
+  <img [src]="data.image" alt="" style="object-fit: contain;">
   <div class="dir-col">
     <div class="dir-row">
       <h3 class="exo">{{data.name}}</h3>
@@ -17,7 +17,7 @@
 </div>
 
 <div class="car-card dir-row" *ngIf="isInventory">
-  <img src="{{data.imageName}}" alt="" style="object-fit: contain;">
+  <img [src]="data.image" alt="data.name" style="object-fit: contain;">
   <div class="dir-col">
     <div class="dir-row">
       <h3 class="exo">{{data.name}}</h3>
