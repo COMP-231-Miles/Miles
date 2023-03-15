@@ -18,12 +18,10 @@ export class AddCarComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     type: new FormControl('', [Validators.required]),
     gear: new FormControl('', [Validators.required]),
-    insurance: new FormControl(''),
     pickupLoc: new FormControl('', [Validators.required, Validators.minLength(10)]),
     passengers: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"),  Validators.max(10), Validators.min(2)]),
     price: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(1)]),
     image: new FormControl('', [Validators.required]),
-    // imageSource: new FormControl('', [Validators.required])
   });
 
   constructor(
@@ -67,7 +65,6 @@ export class AddCarComponent implements OnInit {
         postData.append('type', this.addCarForm.get('type')!.value!);
         postData.append('gear', this.addCarForm.get('gear')!.value!);
         postData.append('pickupLoc', this.addCarForm.get('pickupLoc')!.value!);
-        postData.append('insurance', this.addCarForm.get('insurance')!.value!);
         postData.append(
           'passengers',
           this.addCarForm.get('passengers')!.value!
@@ -95,7 +92,9 @@ export class AddCarComponent implements OnInit {
       this.carService.addCar(postData);
     }
     setTimeout(() => {
-      this.router.navigate(['/car-list']);
+      this.router.navigate(['/car-list'])        .then(() => {
+        window.location.reload();
+      });
     });
   }
 

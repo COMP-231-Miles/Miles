@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,6 @@ export class CarService {
 
   constructor(
     private httpClient: HttpClient,
-    private userService: UserService,
     ) { 
       this.token = localStorage.getItem('token');
 
@@ -30,14 +28,12 @@ export class CarService {
           price: item.price,
           luggage: item.luggage,
           pickupLoc: item.pickupLoc,
-          insurance: item.insurance,
           imageName: item.imageName,
           isAvailable: item.isAvailable
         }
       })
     }))
     .subscribe((res) => {
-      //console.log('res', res);
       this.cars = res;
     })
 

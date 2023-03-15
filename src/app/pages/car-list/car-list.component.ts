@@ -1,6 +1,6 @@
 import { CarService } from 'src/app/services/car.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { take, filter } from 'rxjs';
 
 @Component({
@@ -8,7 +8,7 @@ import { take, filter } from 'rxjs';
   templateUrl: './car-list.component.html',
   styleUrls: ['./car-list.component.scss'],
 })
-export class CarListComponent implements OnInit {
+export class CarListComponent implements OnInit, OnChanges {
   collection: any[] = [];
   page = 1;
   carList: any= [];
@@ -19,16 +19,31 @@ export class CarListComponent implements OnInit {
     private carService: CarService
   ) {}
 
-  ngOnInit() {
-    this.carService
+
+  ngOnChanges(changes: SimpleChanges): void {
+      this.carService
       .getOwnersCars()
       .pipe(take(1))
       .subscribe(res => {
         //weird..
         const cars = JSON.parse(JSON.stringify(res));
         this.carList = cars.data;
-        console.log(this.carList)
       });
+  }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params: ParamMap)=>
+    {
+      this.carService
+      .getOwnersCars()
+      .pipe(take(1))
+      .subscribe(res => {
+        //weird..
+        const cars = JSON.parse(JSON.stringify(res));
+        this.carList = cars.data;
+      });
+    })
+
     for (let i = 1; i <= 100; i++) {
       this.collection.push(`item ${i}`);
     }
@@ -45,5 +60,9 @@ export class CarListComponent implements OnInit {
   deleteCar(id: string) {
     this.carList = this.carList.filter((car: any) => car._id !== id);
     this.carService.deleteCarById(id).pipe(take(1)).subscribe();
+  }
+
+  editCar(id: string) {
+
   }
 }

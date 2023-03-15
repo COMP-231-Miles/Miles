@@ -67,7 +67,6 @@ async (req, res, next) => {
     isAuto: req.body.isAuto,
     ACsup: req.body.ACsup,
     pickupLoc: req.body.pickupLoc,
-    insurance: req.body.insurance,
     image: url + "/images/" + req.file.filename,
     isAvailable: req.body.isAvailable,
     user: user._id,

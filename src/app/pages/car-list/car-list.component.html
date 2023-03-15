@@ -21,7 +21,7 @@
           <td class="td-pickupLoc">{{ item.pickupLoc }}</td>
           <td class="td-price">{{ item.price | currency:'CAD':'code'}}</td>
           <td class="td-edit">
-            <button type="button" class="btn btn-outline-dark">Edit</button>
+            <button type="button" (click)="editCar(item._id)" class="btn btn-outline-dark">Edit</button>
           </td>
           <td class="td-delete">
             <button type="button" (click)="deleteCar(item._id)" class="btn btn-outline-danger">Delete</button>

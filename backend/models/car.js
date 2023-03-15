@@ -11,7 +11,6 @@ const carSchema = new Schema({
   isAuto: Boolean,
   ACsup: Boolean,
   pickupLoc: String,
-  insurance: Number,
   image: String,
   isAvailable: Boolean,
   user: {
