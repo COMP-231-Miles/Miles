@@ -9,9 +9,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink='/contact-us' routerLinkActive='active'>Contact Us</a>
         </li>
-        <li class="nav-item" *ngIf="currentUser$ | async">
-          <a class="nav-link" routerLink='/car-list'>List</a>
-        </li>
+        <div *ngIf="currentUser$ | async">
+          <li class="nav-item" *ngIf="userType$ | async">
+            <a class="nav-link" routerLink='/car-list'>List</a>
+          </li>
+        </div>
+
         <li class="nav-item" *ngIf="currentUser$ | async">
           <a class="nav-link" (click)="logout()" href="#">Logout</a>
         </li>

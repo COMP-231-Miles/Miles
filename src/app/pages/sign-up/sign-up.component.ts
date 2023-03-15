@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit {
   loading = false;
   submitted = false;
   ngUnsubscribe = new Subject<void>();
+  readonly USER_TYPE = ['USER', 'OWNER'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +28,7 @@ export class SignUpComponent implements OnInit {
       {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
+        userType: ['', Validators.required],
         DOB: ['', Validators.required],
         address: this.formBuilder.group({
           street: [''],
@@ -62,6 +64,10 @@ export class SignUpComponent implements OnInit {
     );
   }
 
+  changeType(e: any): void {
+    this.registerForm.get('userType')?.setValue(e.target.value);
+  }
+
   onSubmit(): void {
     this.submitted = true;
     // stop here if form is invalid
@@ -85,6 +91,10 @@ export class SignUpComponent implements OnInit {
 
   get lastName() {
     return this.registerForm.get('lastName');
+  }
+
+  get userType() {
+    return this.registerForm.get('userType');
   }
 
   get getDOB() {
