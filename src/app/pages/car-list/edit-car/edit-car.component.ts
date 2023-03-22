@@ -59,24 +59,29 @@ export class EditCarComponent implements OnInit {
   submit(): void {    
     const user: any = localStorage.getItem('user');
     const parsedUser: any = JSON.parse(user);
+    let postData: FormData;
 
     if(!this.editCarForm.invalid) {
-      let postData: FormData;
         postData = {
+          _id: this.car._id,
           name: this.editCarForm.get('name')!.value!,
           type: this.editCarForm.get('type')!.value!,
           gear: this.editCarForm.get('gear')!.value!,
-          insurance: this.editCarForm.get('insurance')!.value!,
           pickupLoc: this.editCarForm.get('pickupLoc')!.value!,
           passengers: this.editCarForm.get('passengers')!.value!,
           price: this.editCarForm.get('price')!.value!,
           image: this.car.image
         } as any;
+        console.log('sibal');
+        this.carService.updateCar(this.car._id, postData);
+        
+        setTimeout(() => {
+          this.router.navigate(['/car-list']).then(() => {
+            window.location.reload();
+          });
+        });
       }
-    setTimeout(() => {
-      this.router.navigate(['/car-list']).then(() => {
-        window.location.reload();
-      });
-    });
+
+
   }
 }

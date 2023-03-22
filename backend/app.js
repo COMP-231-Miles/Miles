@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const testRoutes = require('./routes/test');
 const userRoutes = require('./routes/user');
 const carRoutes = require('./routes/car');
+const carSearchRoutes = require('./routes/searchCar');
+
 const reservationRoutes = require('./routes/reservation');
 const policyRoutes = require('./routes/policy');
 const verifyOwnerJWT = require('./middleware/check-owner-auth');
@@ -53,6 +55,8 @@ app.use((req, res, next) => {
 app.use('/api/posts', testRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/car', verifyOwnerJWT, carRoutes);
+app.use('/api/searchCar', carSearchRoutes);
+
 app.use('/api/reservation', reservationRoutes);
 app.use('/api/policy', policyRoutes);
 

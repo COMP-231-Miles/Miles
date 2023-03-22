@@ -10,6 +10,7 @@ const carSchema = new Schema({
   luggage: Number,
   isAuto: Boolean,
   ACsup: Boolean,
+  gear: String,
   pickupLoc: String,
   image: String,
   isAvailable: Boolean,

@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,7 @@ export class CarService {
   }
 
   getCars2 () {
-    return this.httpClient.get<any>('http://localhost:3000/api/car');
+    return this.httpClient.get<any>('http://localhost:3000/api/searchCar');
   }
 
   getCarById(id:string) {
@@ -64,5 +64,12 @@ export class CarService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Bearer ' + this.token )
     return this.httpClient.get<any>('http://localhost:3000/api/car/owner', { headers: headers });
+  }
+
+  updateCar(id:string, body: any) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.token )
+    return this.httpClient
+    .put<any>('http://localhost:3000/api/car/' + id, body, { headers: headers }).subscribe();
   }
 }

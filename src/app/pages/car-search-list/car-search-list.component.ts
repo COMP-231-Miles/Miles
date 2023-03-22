@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { CarService } from 'src/app/services/car.service';
 import { ReservationService } from 'src/app/services/reservation.service';
 
@@ -10,17 +10,20 @@ import { ReservationService } from 'src/app/services/reservation.service';
   styleUrls: ['./car-search-list.component.scss']
 })
 export class CarSearchListComponent implements OnInit {
-
+  cars$: Observable<any[]>;
+  filteredCars$: Observable<any[]>;
   dateFromToCheck: any;
   dateToToCheck: any;
   constructor(private route: ActivatedRoute, private carService: CarService, private reservationService: ReservationService) { 
     this.locationToCheck = this.route.snapshot.paramMap.get('location')?.replace('%20', ' ');
     this.dateFromToCheck = this.route.snapshot.paramMap.get('dateFrom');
     this.dateToToCheck = this.route.snapshot.paramMap.get('dateTo');    
-    this.getCars();    
   }
 
   ngOnInit(): void {
+    this.filteredCars$ = this.carService.getCars2().pipe(
+      map(res => res.data.filter((car: any) => car.isAvailable))
+    );
   }
 
   locationToCheck: any;
@@ -31,9 +34,6 @@ export class CarSearchListComponent implements OnInit {
   getCars() {
     this.carService.getCars2().subscribe(res => {
       this.carList = res.data.filter((car: any) => car.isAvailable);
-      //filter reservations by location
-      console.log('cars: ');
-      console.log(this.carList);
       this.getReservations();      
     });    
   }
@@ -88,4 +88,29 @@ export class CarSearchListComponent implements OnInit {
     
   }
 
+  onFilterChange(event: any) {
+    const [type, numOfPassenger] = event;
+    const selectedType = type.filter((type: any) => type.checked)
+    .map((type: any) => type.title)
+    const selectedNumOfPassenger = numOfPassenger.filter((num: any) => num.checked)
+    .map((num: any) => num.value);
+
+
+    this.filteredCars$ = this.carService.getCars2().pipe(
+      map((res: any) => res.data.filter((car: any) => car.isAvailable)),
+      map(cars => {
+        if (selectedType.length > 0) {
+          cars = cars.filter((car: any) => selectedType.includes(car.type));
+        }
+        if (selectedNumOfPassenger.length > 0) {
+          cars = cars.filter((car: any) => {
+            return selectedNumOfPassenger.some((count: any) => {
+              return car.passengers >= parseInt(count);
+            });
+          });
+        }
+        return cars;
+      })
+    );
+  }
 }
