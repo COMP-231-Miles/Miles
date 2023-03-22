@@ -56,7 +56,6 @@ async (req, res, next) => {
       data: { errors: errors },
     });
   }
-  console.log(req.body)
   //mongoose model name
   const carToAdd = new Car({
     name: req.body.name,
@@ -64,6 +63,7 @@ async (req, res, next) => {
     passengers: req.body.passengers,
     price: req.body.price,
     luggage: req.body.luggage,
+    gear: req.body.gear,
     isAuto: req.body.isAuto,
     ACsup: req.body.ACsup,
     pickupLoc: req.body.pickupLoc,
@@ -81,7 +81,6 @@ async (req, res, next) => {
 });
 
 // Get all cars
-
 router.get('', (req, res, next) => {
   //mongoose model name
   Car.find() // return all result.
@@ -112,7 +111,6 @@ router.get('/owner', async (req, res, next) => {
 router.delete('/delete/:id', async (req, res, next) => {
   //mongoose model name
   // const user = await checkAndReturUser(req);
-
   const car = await Car.findOne({ _id: req.params.id });
   if (!car) {
     res.status(404).json({
@@ -146,9 +144,9 @@ router.get('/:id', (req, res, next) => {
 });
 
 // Update car by ID
-router.post('/:id', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   // const user = await checkAndReturUser(req);
-
+  console.log('callled');
   const car = await Car.findOne({ _id: req.params.id });
   if (!car) {
     res.status(404).json({
@@ -175,15 +173,14 @@ router.post('/:id', async (req, res, next) => {
     imageName: req.body.imageName,
     isAvailable: req.body.isAvailable,
   };
-
-  //mongoose model name
-  const updatedCar = await Car.findOneAndUpdate(
-    { _id: req.params.id },
-    updateCar
-  );
-  return res.status(201).json({
-    message: 'Car updated successfully',
-    car: await Car.findOne({ _id: req.params.id }),
+  console.log('updatedCar', updateCar);
+  await Car.findByIdAndUpdate(req.body._id, updateCar, {
+    new: true,
+  }).then(result => {
+    res.status(200).json({
+      message: 'Updated successful!',
+      data: result,
+    });
   });
 });
 

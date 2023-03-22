@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-filter',
@@ -7,25 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class FilterComponent implements OnInit {
+  @Output() filterOptions = new EventEmitter<any[]>();
+
   types = [
     {
       id: 1,
-      title: 'cars',
+      title: 'Sedan',
       checked: false,
     },
     {
       id: 2,
-      title: 'suvs',
+      title: 'SUV',
       checked: false,
     },
     {
       id: 3,
-      title: 'trucks',
+      title: 'Truck',
       checked: false,
     },
     {
       id: 4,
-      title: 'vans',
+      title: 'Van',
       checked: false,
     },
   ]
@@ -34,31 +36,37 @@ export class FilterComponent implements OnInit {
     {
       id: 1,
       title: '2+',
+      value:2,
       checked: false,
     },
     {
       id: 2,
       title: '4+',
+      value:4,
       checked: false,
     },
     {
       id: 3,
       title: '5+',
+      value:5,
       checked: false,
     },
     {
       id: 4,
       title: '6+',
+      value:6,
       checked: false,
     },
     {
       id: 5,
       title: '7+',
+      value:7,
       checked: false,
     },
     {
       id: 6,
       title: '8+',
+      value:8,
       checked: false,
     },
   ]
@@ -67,5 +75,10 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  onFilterChange(event: any) {
+    const options = [this.types, this.numberOfPassengers];
+    this.filterOptions.emit(options);
   }
 }
